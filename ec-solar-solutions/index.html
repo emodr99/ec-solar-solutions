@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EC Solar Solutions | Full Blast Energy, Zero Worries on Electric Bill</title>
+<meta name="description" content="EC Solar Solutions helps Filipino families take back control of their electricity costs with a solar system designed around how your home actually uses power. Free site assessment.">
+<meta name="theme-color" content="#FAF2E4">
+<meta name="color-scheme" content="light">
+
+<!-- DEPLOY STEP: patch og:url and og:image with the live absolute URL before zipping -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="EC Solar Solutions | Full Blast Energy, Zero Worries on Electric Bill">
+<meta property="og:description" content="We help Filipino homeowners understand and manage their electricity costs with thoughtfully designed solar systems.">
+<meta property="og:url" content="REPLACE_AT_DEPLOY">
+<meta property="og:image" content="REPLACE_AT_DEPLOY/assets/logo.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B4F43'/%3E%3Cpath d='M32 8l5 10 11-3-3 11 10 6-10 6 3 11-11-3-5 10-5-10-11 3 3-11-10-6 10-6-3-11 11 3z' fill='none' stroke='%23FFD700' stroke-width='3' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23F28C28'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=IBM+Plex+Mono:wght@500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS  (warm daylight page, cinematic golden hero)
+   ============================================================ */
+:root{
+  /* every value below is sampled from the drone footage's own palette,
+     so the page and the film read as one place */
+  --canvas:#F4EDE0;          /* the warm stone of the golden-hour sky */
+  --canvas-lift:#E9E0CE;
+  --panel:#FCF8F0;
+  --brand-green:#0B4F43;
+
+  --text-primary:#232E22;    /* the deep field green */
+  --text-secondary:#5E6353;  /* the olive grey of the dry grass */
+
+  --accent:#F28C28;          /* button fill, the brand orange */
+  --accent-hover:#E4761A;
+  --accent-ink:#2A1204;      /* text that sits on the accent */
+  --accent-deep:#A8541A;     /* accent as TEXT on the light canvas */
+  --gold:#E0A800;            /* decorative gold */
+  --gold-ink:#7E6420;        /* the khaki gold, as small text */
+
+  --line:rgba(35,46,34,.17);
+  --line-strong:rgba(35,46,34,.62);   /* interactive borders, measured for 3:1 */
+
+  /* the hero runs on its own dark set so the words stay readable over the sky */
+  --h-ink:#FFF7EA;
+  --h-ink-2:#F2DFC4;
+
+  --display:'Bricolage Grotesque',Georgia,serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-soft:cubic-bezier(.4,0,.2,1);
+  --tshadow:0 1px 2px rgba(40,18,2,.9),0 3px 12px rgba(40,18,2,.7),0 10px 44px rgba(40,18,2,.72);
+  --wrap:min(1180px,92vw);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:hidden;overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--canvas);color:var(--text-primary);
+  font-family:var(--body);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+/* height:auto matters: without it an image carrying explicit width/height
+   attributes gets squashed the moment its column is narrower than those numbers */
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.05;letter-spacing:-.022em;margin:0}
+p{margin:0}
+:focus-visible{outline:3px solid var(--accent-deep);outline-offset:3px;border-radius:4px}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--accent);color:var(--accent-ink);padding:12px 18px;border-radius:0 0 10px 0;font-weight:600}
+.skip:focus{left:0}
+
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 18px}
+.lede{color:var(--text-secondary);font-size:1.06rem;max-width:62ch}
+
+/* ============================================================
+   THE ENVIRONMENT LAYER
+   ============================================================ */
+.env{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.env::before{
+  content:"";position:absolute;inset:-25%;
+  background:
+    radial-gradient(closest-side at 20% 16%,rgba(242,140,40,.13),transparent 70%),
+    radial-gradient(closest-side at 84% 70%,rgba(224,168,0,.12),transparent 70%),
+    radial-gradient(closest-side at 52% 106%,rgba(11,79,67,.10),transparent 70%);
+  animation:envdrift 96s var(--ease-soft) -22s infinite alternate;
+}
+@keyframes envdrift{
+  0%{transform:translate3d(-2.5%,-1.5%,0) scale(1.04)}
+  100%{transform:translate3d(2.5%,2%,0) scale(1.10)}
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;gap:20px;
+  padding:12px max(20px,4vw);
+  background:linear-gradient(180deg,rgba(30,14,2,.62),rgba(30,14,2,0));
+  transition:background .5s var(--ease),backdrop-filter .5s var(--ease),border-color .5s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.stuck{background:rgba(250,242,228,.94);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.brand{display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto;min-width:0}
+/* the real mark ships uncompressed, on its own plate so its white ground reads as design */
+/* the header carries the sun mark alone, at its true proportions. The full
+   lockup already contains the wordmark, and at header size that wordmark is
+   an illegible smudge, so the mark leads and the name is set in type beside it. */
+.brandmark{
+  flex:none;width:58px;height:58px;background:#fff;border-radius:14px;padding:5px;
+  box-shadow:0 3px 14px rgba(35,46,34,.18);display:grid;place-items:center;
+}
+.brandmark img{width:100%;height:auto;object-fit:contain}
+.wordmark{display:block;min-width:0}
+.wordmark b{
+  display:block;font-family:var(--display);font-size:1.02rem;letter-spacing:-.01em;
+  white-space:nowrap;color:var(--h-ink);transition:color .5s var(--ease);
+}
+.wordmark i{
+  display:block;font-style:normal;font-family:var(--mono);font-size:.6rem;letter-spacing:.13em;
+  text-transform:uppercase;color:#EBD3AC;margin-top:3px;white-space:nowrap;transition:color .5s var(--ease);
+}
+.nav.stuck .wordmark b{color:var(--text-primary)}
+.nav.stuck .wordmark i{color:var(--gold-ink)}
+.navlinks{display:flex;gap:26px;font-size:.9rem}
+.navlinks a{text-decoration:none;color:#EBD3AC;transition:color .3s var(--ease)}
+.nav.stuck .navlinks a{color:var(--text-secondary)}
+.navlinks a:hover{color:var(--accent)}
+.nav.stuck .navlinks a:hover{color:var(--accent-deep)}
+@media(max-width:1000px){.navlinks{display:none}}
+@media(max-width:660px){
+  .nav{padding:10px 14px;gap:10px}
+  .wordmark i{display:none}
+  .wordmark b{font-size:.9rem}
+  .brandmark{width:44px;height:44px;border-radius:11px}
+  .nav .btn{padding:12px 15px;font-size:.84rem}
+}
+@media(max-width:430px){.wordmark{display:none}}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--body);font-weight:600;font-size:.95rem;
+  padding:15px 26px;border-radius:999px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;position:relative;
+  transition:transform .45s var(--ease),background-color .45s var(--ease),border-color .45s var(--ease),color .45s var(--ease),box-shadow .45s var(--ease);
+}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 26px rgba(242,140,40,.34)}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 14px 36px rgba(242,140,40,.42)}
+.btn-ghost{border-color:var(--line-strong);color:var(--text-primary);background:rgba(255,255,255,.5)}
+.btn-ghost:hover{border-color:var(--accent-deep);color:var(--accent-deep);transform:translateY(-2px)}
+.band .btn-ghost,.statichero .btn-ghost{border-color:rgba(255,247,234,.65);color:var(--h-ink);background:rgba(40,18,2,.34)}
+.band .btn-ghost:hover,.statichero .btn-ghost:hover{border-color:var(--gold);color:var(--gold);background:rgba(40,18,2,.5)}
+.btn svg{width:16px;height:16px;flex:none}
+@media(pointer:coarse){
+  .btn{min-height:48px}
+  .brand{min-height:44px}
+  input[type=range]{height:44px;margin-top:14px}
+}
+
+/* ============================================================
+   THE HERO
+   ============================================================ */
+.hero{position:relative;height:560vh;z-index:1}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#2A1204}
+.scene{position:absolute;inset:0;width:100%;height:100%}
+.scene svg{width:100%;height:100%;display:block}
+.motes{position:absolute;inset:0;pointer-events:none;opacity:.55}
+
+/* the footage, and the poster that holds the frame until it arrives */
+.poster{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+.stage video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  opacity:0;transition:opacity .7s var(--ease);
+  will-change:transform;transform:translateZ(0);   /* its own compositor layer */
+}
+.stage.video-ready video{opacity:1}
+.stage.video-failed .ringwrap{display:none}
+
+.ringwrap{
+  position:absolute;left:50%;bottom:30px;transform:translateX(-50%);
+  display:grid;place-items:center;width:48px;height:48px;color:var(--gold);
+  opacity:calc(1 - clamp(0,var(--p,0)*6,1));transition:opacity .5s var(--ease);pointer-events:none;
+}
+.stage.video-ready .ringwrap{opacity:0}
+.ringwrap svg{width:48px;height:48px;transform:rotate(-90deg)}
+.ringwrap circle{transition:stroke-dashoffset .25s linear}
+.ringwrap::after{
+  content:"";position:absolute;width:48px;height:48px;border-radius:50%;
+  border:1px solid rgba(255,247,234,.2);
+}
+@media(max-height:560px){.ringwrap{display:none}}
+
+.scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 120% 92% at 42% 48%,rgba(30,12,2,0) 32%,rgba(30,12,2,.6) 100%);
+}
+.scrim-l{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(28,11,2,.5) 0%,rgba(28,11,2,.44) 26%,rgba(28,11,2,.2) 46%,rgba(28,11,2,0) 60%);
+}
+.scrim-b{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(28,11,2,.5) 0%,rgba(28,11,2,0) 26%,rgba(28,11,2,0) 70%,rgba(28,11,2,.34) 100%);
+}
+
+.bands{position:absolute;inset:0}
+.band{
+  position:absolute;inset:0;display:grid;align-content:center;
+  padding:0 max(24px,6vw);opacity:0;pointer-events:none;
+  color:var(--h-ink);text-shadow:var(--tshadow);
+}
+.band::before{
+  content:"";position:absolute;inset:-6%;pointer-events:none;
+  opacity:calc(.25 + .75*var(--k,1));
+  background:radial-gradient(ellipse 66% 70% at 27% 50%,rgba(24,9,1,.58) 0%,rgba(24,9,1,.42) 50%,rgba(24,9,1,0) 80%);
+}
+#band1::before{background:radial-gradient(ellipse 70% 78% at 27% 50%,rgba(24,9,1,.68) 0%,rgba(24,9,1,.52) 52%,rgba(24,9,1,0) 82%)}
+/* bands 2 and 3 sit over the bright sky as the camera rises, so they run deeper */
+#band2::before,#band3::before{background:radial-gradient(ellipse 68% 74% at 27% 50%,rgba(24,9,1,.66) 0%,rgba(24,9,1,.50) 50%,rgba(24,9,1,0) 80%)}
+.band > *{position:relative;z-index:2}
+.band.on{pointer-events:auto}
+.band .btn{text-shadow:none}
+.bandtext{max-width:min(620px,44vw)}
+@media(max-width:1100px){.bandtext{max-width:min(620px,64vw)}}
+.band h1,.band h2{font-size:clamp(2rem,4.6vw,3.9rem)}
+.band .kicker{color:var(--gold)}
+.band .sub{margin-top:20px;font-size:clamp(1rem,1.35vw,1.2rem);color:var(--h-ink-2);max-width:44ch}
+.band .micro{font-size:clamp(1.35rem,2.5vw,2.15rem);font-family:var(--display);font-weight:700;line-height:1.18;max-width:22ch}
+#band4 .row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.w{display:inline-block;white-space:pre}
+.c{display:inline-block;will-change:transform,opacity}
+.e-scatter .c{
+  --kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);
+  transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px))) rotate(calc((1 - var(--kc))*var(--jr,0deg)));
+}
+.e-drift .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*-26px))}
+.e-blur{position:relative}
+.e-blur .soft{position:absolute;inset:0;filter:blur(11px);opacity:calc(1 - var(--k,0));pointer-events:none}
+.e-blur .sharp{opacity:var(--k,0)}
+.e-rise .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*3,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*30px))}
+.e-rise-sub{--ks:clamp(0,(var(--k,0) - .60)*4,1);opacity:var(--ks);transform:translateY(calc((1 - var(--ks))*18px))}
+.e-rise-cta{--kb:clamp(0,(var(--k,0) - .76)*5,1);opacity:var(--kb);transform:translateY(calc((1 - var(--kb))*18px))}
+
+.cue{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  display:grid;justify-items:center;gap:8px;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#E8CFA6;
+  opacity:calc(1 - clamp(0,var(--p,0)*7,1));pointer-events:none;
+}
+/* while the film is streaming the ring owns this spot; the cue takes over after */
+.stage:not(.video-ready):not(.video-failed) .cue{opacity:0}
+.cue i{display:block;width:1px;height:34px;background:linear-gradient(180deg,var(--gold),transparent);animation:cuedrop 2.6s var(--ease-soft) -.4s infinite}
+@keyframes cuedrop{0%{transform:scaleY(.2);transform-origin:top;opacity:0}40%{opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
+@media(max-height:560px){.cue{display:none}}
+
+.statichero{display:none;position:relative;z-index:1;min-height:100svh;align-items:center;overflow:hidden;background:#2A1204;color:var(--h-ink)}
+.statichero .scene{position:absolute;inset:0}
+.statichero .inner{position:relative;z-index:3;width:var(--wrap);margin:0 auto;padding:118px 0 64px}
+.statichero h1{font-size:clamp(2.1rem,7.4vw,3.1rem);text-shadow:var(--tshadow)}
+.statichero .kicker{color:var(--gold)}
+.statichero .sub{margin-top:18px;color:var(--h-ink-2);max-width:40ch;text-shadow:var(--tshadow)}
+.statichero .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+/* the composed still, taken from the 4K master at the film's resting frame */
+.sposter{background-image:url('assets/hero-end.jpg');background-size:cover;background-position:50% 42%}
+.statichero .fade{display:none}
+@media(max-width:720px){
+  .statichero{align-items:flex-start}
+  .sposter{background-position:50% 76%}
+  .statichero .fade{
+    display:block;position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(180deg,rgba(22,15,7,.93) 0%,rgba(22,15,7,.78) 34%,rgba(22,15,7,.42) 58%,rgba(22,15,7,.30) 78%,rgba(22,15,7,.62) 100%);
+  }
+  .statichero .scrim-l{background:none}
+  .statichero .inner{padding:104px 0 78px}
+  .statichero .sub{max-width:34ch}
+  .statichero .row .btn{width:100%}
+}
+
+/* THE FIVE STATIC-HERO GATES (must match the JS list character for character) */
+@media (max-width: 720px){ .hero{display:none}.statichero{display:flex} }
+@media (orientation: portrait) and (max-width: 1024px){ .hero{display:none}.statichero{display:flex} }
+@media (orientation: portrait) and (pointer: coarse){ .hero{display:none}.statichero{display:flex} }
+@media (orientation: landscape) and (pointer: coarse) and (max-height: 560px){ .hero{display:none}.statichero{display:flex} }
+@media (prefers-reduced-motion: reduce){ .hero{display:none}.statichero{display:flex} }
+
+/* ============================================================
+   THE CONDUCTOR (signature element)
+   ============================================================ */
+.conductor{position:absolute;top:0;bottom:0;left:calc(50% - min(628px,48vw));width:2px;z-index:1;pointer-events:none}
+.conductor svg{position:sticky;top:0;height:100vh;width:120px;margin-left:-59px;overflow:visible}
+.cond-track{stroke:rgba(27,58,49,.16);stroke-width:1.5;fill:none}
+.cond-live{stroke:url(#condgrad);stroke-width:2.4;fill:none}
+.cond-pulse{fill:var(--accent-deep)}
+@media(max-width:1300px){.conductor{display:none}}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+main{position:relative;z-index:2}
+.sec{position:relative;padding:clamp(78px,10vw,140px) 0}
+.wrap{width:var(--wrap);margin:0 auto}
+.sec-head{max-width:60ch}
+.sec h2{font-size:clamp(1.9rem,3.9vw,3.15rem);max-width:21ch}
+.sec h2 + .lede{margin-top:20px}
+
+.rise{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.in .rise,.rise.in{opacity:1;transform:none}
+.stag > *{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.stag.in > *{opacity:1;transform:none}
+.stag.in > *:nth-child(1){transition-delay:0s}
+.stag.in > *:nth-child(2){transition-delay:.09s}
+.stag.in > *:nth-child(3){transition-delay:.18s}
+.stag.in > *:nth-child(4){transition-delay:.27s}
+.stag.in > *:nth-child(5){transition-delay:.36s}
+.stag.in > *:nth-child(6){transition-delay:.45s}
+.stag.done.in > *:nth-child(1),.stag.done.in > *:nth-child(2),.stag.done.in > *:nth-child(3),
+.stag.done.in > *:nth-child(4),.stag.done.in > *:nth-child(5),.stag.done.in > *:nth-child(6){transition-delay:0s}
+
+/* --- benefit cards --- */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
+@media(max-width:940px){.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid4{grid-template-columns:1fr}}
+.card{
+  position:relative;background:var(--panel);
+  border:1px solid var(--line);border-radius:18px;padding:28px 24px 26px;overflow:hidden;
+  box-shadow:0 2px 10px rgba(40,18,2,.05);
+  transition:transform .55s var(--ease),border-color .55s var(--ease),box-shadow .55s var(--ease);
+}
+.card:hover{transform:translateY(-5px);border-color:rgba(242,140,40,.5);box-shadow:0 16px 40px rgba(40,18,2,.10)}
+.card h3{font-size:1.12rem;margin-bottom:9px}
+.card p{color:var(--text-secondary);font-size:.95rem}
+.card .ic{width:38px;height:38px;margin-bottom:18px;color:var(--accent-deep)}
+
+/* --- why us --- */
+.empathy{background:linear-gradient(180deg,transparent,rgba(242,140,40,.09),transparent)}
+.empathygrid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px 64px;
+  grid-template-areas:"head head" "body shift";align-items:start}
+.empathygrid .ehead{grid-area:head}
+.empathygrid .body{grid-area:body}
+.empathygrid .shift{grid-area:shift}
+@media(max-width:900px){.empathygrid{grid-template-columns:1fr;grid-template-areas:"head" "body" "shift"}}
+.empathy .body{max-width:56ch;margin-top:26px;display:grid;gap:20px;color:var(--text-secondary)}
+.empathy .body em{color:var(--text-primary);font-style:normal;font-weight:600}
+
+.shift{display:grid;grid-template-columns:1fr;gap:14px;margin-top:26px;position:sticky;top:112px}
+.shift .arrow{justify-self:center;transform:rotate(90deg);color:var(--accent-deep);width:34px;height:34px}
+@media(max-width:900px){.shift{position:static;margin-top:44px}}
+.shift .side{border:1px solid var(--line);border-radius:18px;padding:26px;background:var(--panel)}
+.shift .side .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:12px}
+.shift .side q{font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,2.1vw,1.62rem);quotes:none;display:block;line-height:1.2}
+.shift .side .note{margin-top:12px;font-size:.9rem;color:var(--text-secondary)}
+.shift .side.after{border-color:rgba(242,140,40,.55);background:linear-gradient(160deg,#FFF6E6,#FFFCF6)}
+.shift .side.after q{color:var(--accent-deep)}
+
+/* ============================================================
+   THE 3D EXPLAINER
+   ============================================================ */
+.explain{
+  margin-top:52px;border:1px solid var(--line);border-radius:24px;overflow:hidden;
+  background:linear-gradient(170deg,#123A32,#0B2A24 60%,#08211C);
+  position:relative;
+}
+.stage3d{
+  position:relative;height:clamp(320px,42vw,460px);
+  perspective:1000px;perspective-origin:50% 42%;
+  display:grid;place-items:center;overflow:hidden;
+}
+.stage3d::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 55% at 50% 62%,rgba(255,196,90,.20),transparent 70%);
+}
+.world{
+  position:relative;width:0;height:0;transform-style:preserve-3d;
+  transform:rotateX(58deg) rotateZ(-28deg);
+}
+.spinning .world{animation:worldspin 54s linear infinite}
+@keyframes worldspin{
+  from{transform:rotateX(58deg) rotateZ(-28deg)}
+  to{transform:rotateX(58deg) rotateZ(332deg)}
+}
+.world > *{position:absolute;transform-style:preserve-3d}
+
+.ground{
+  width:420px;height:420px;left:-210px;top:-210px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,rgba(255,203,112,.16),rgba(11,42,36,0) 70%);
+  border:1px solid rgba(255,203,112,.16);
+}
+.ring2{
+  width:300px;height:300px;left:-150px;top:-150px;border-radius:50%;
+  border:1px dashed rgba(255,203,112,.20);
+}
+
+/* the house: a box of four walls, a roof deck, and a tilted panel array on top */
+.wall{width:170px;height:92px;left:-85px;top:-46px;border:1px solid rgba(255,222,170,.2)}
+.wall.front{background:linear-gradient(180deg,#14584B,#0C3B32);transform:translateY(-85px) translateZ(46px) rotateX(90deg)}
+.wall.back{background:linear-gradient(180deg,#0F4A3E,#0A3128);transform:translateY(85px) translateZ(46px) rotateX(90deg) rotateY(180deg)}
+.wall.left{background:linear-gradient(180deg,#10493D,#0A3128);transform:translateX(-85px) translateZ(46px) rotateX(90deg) rotateY(-90deg)}
+.wall.right{background:linear-gradient(180deg,#10493D,#0A3128);transform:translateX(85px) translateZ(46px) rotateX(90deg) rotateY(90deg)}
+
+.deck{
+  width:170px;height:170px;left:-85px;top:-85px;
+  background:linear-gradient(150deg,#17685A,#0E4A3F);border:1px solid rgba(255,222,170,.26);
+  transform:translateZ(92px);
+}
+.array3d{
+  width:124px;height:132px;left:-62px;top:-66px;
+  background:
+    repeating-linear-gradient(90deg,rgba(190,225,215,.4) 0 1px,transparent 1px 21px),
+    repeating-linear-gradient(0deg,rgba(190,225,215,.4) 0 1px,transparent 1px 22px),
+    linear-gradient(150deg,#2A7DA0,#0A2A3A);
+  border:1px solid rgba(190,225,215,.55);border-radius:2px;
+  transform:translateZ(114px) rotateX(-20deg);
+}
+.mount{
+  width:120px;height:5px;left:-60px;top:-2px;background:rgba(255,222,170,.28);
+  transform:translateY(46px) translateZ(96px) rotateX(90deg);
+}
+
+.sun3d{
+  width:78px;height:78px;left:-39px;top:-39px;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,#FFF6D2,#FFD24A 46%,#F2820F);
+  box-shadow:0 0 50px 20px rgba(255,190,70,.4);
+  transform:translateX(-112px) translateY(-34px) translateZ(158px) rotateX(-58deg);
+}
+.inverter{
+  width:24px;height:32px;left:-12px;top:-16px;border-radius:3px;
+  background:linear-gradient(180deg,#F2EBDD,#C7B79C);border:1px solid rgba(40,18,2,.35);
+  transform:translateX(-52px) translateY(-86px) translateZ(50px) rotateX(90deg);
+}
+.pole{
+  width:6px;height:130px;left:-3px;top:-65px;background:linear-gradient(180deg,#A98554,#5A4227);
+  transform:translateX(158px) translateY(62px) translateZ(65px) rotateX(90deg);
+}
+.crossarm{
+  width:54px;height:5px;left:-27px;top:-2px;background:#A98554;
+  transform:translateX(158px) translateY(62px) translateZ(122px) rotateX(90deg);
+}
+
+/* the energy travelling through the chain */
+.spark{
+  width:12px;height:12px;left:-6px;top:-6px;border-radius:50%;
+  background:radial-gradient(circle,#FFF3C4,#FFC53D 55%,rgba(255,197,61,0) 72%);
+  opacity:0;
+}
+.spinning .spark{animation:sparkpulse 3.4s var(--ease-soft) infinite}
+.spark.s1{transform:translateX(-98px) translateY(-30px) translateZ(150px);animation-delay:0s}
+.spark.s2{transform:translateX(-40px) translateY(0px) translateZ(132px);animation-delay:.34s}
+.spark.s3{transform:translateX(-76px) translateY(-40px) translateZ(76px);animation-delay:.68s}
+.spark.s4{transform:translateX(0px) translateY(30px) translateZ(50px);animation-delay:1.02s}
+.spark.s5{transform:translateX(76px) translateY(58px) translateZ(40px);animation-delay:1.36s}
+.spark.s6{transform:translateX(148px) translateY(56px) translateZ(104px);animation-delay:1.7s}
+@keyframes sparkpulse{0%{opacity:0;}12%{opacity:1}34%{opacity:0}100%{opacity:0}}
+
+/* the currently-read step lights its part of the model */
+.explain[data-step="2"] .array3d{box-shadow:0 0 30px 8px rgba(255,197,61,.6);border-color:#FFD24A}
+.explain[data-step="1"] .sun3d{box-shadow:0 0 66px 26px rgba(255,190,70,.6)}
+.explain[data-step="3"] .inverter{box-shadow:0 0 24px 8px rgba(255,197,61,.6)}
+.explain[data-step="4"] .wall{border-color:rgba(255,210,74,.7);background:linear-gradient(180deg,#1B6D5D,#10493D)}
+.explain[data-step="6"] .pole,.explain[data-step="6"] .crossarm{box-shadow:0 0 22px 7px rgba(255,197,61,.5)}
+
+.explainbar{
+  display:flex;flex-wrap:wrap;gap:8px;padding:16px 20px;border-top:1px solid rgba(255,222,170,.16);
+  background:rgba(6,26,22,.5);
+}
+.explainbar span{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(240,223,196,.62);padding:6px 11px;border-radius:99px;border:1px solid rgba(255,222,170,.2);
+  transition:color .5s var(--ease),border-color .5s var(--ease),background-color .5s var(--ease);
+}
+.explain[data-step="1"] .explainbar span:nth-child(1),
+.explain[data-step="2"] .explainbar span:nth-child(2),
+.explain[data-step="3"] .explainbar span:nth-child(3),
+.explain[data-step="4"] .explainbar span:nth-child(4),
+.explain[data-step="5"] .explainbar span:nth-child(5),
+.explain[data-step="6"] .explainbar span:nth-child(6){color:#2A1204;background:var(--gold);border-color:var(--gold)}
+
+/* --- the steps --- */
+.journey{display:grid;margin-top:44px}
+.jnode{display:grid;grid-template-columns:70px 1fr auto;gap:24px;align-items:start;padding:24px 0;position:relative}
+.jnode + .jnode{border-top:1px solid var(--line)}
+.jmark{
+  position:relative;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line);background:var(--panel);color:var(--text-secondary);
+  transition:color .7s var(--ease),border-color .7s var(--ease),box-shadow .7s var(--ease),background-color .7s var(--ease);
+}
+.jmark svg{width:32px;height:32px}
+.jnode.lit .jmark{color:var(--accent-ink);border-color:var(--accent);background:var(--gold);box-shadow:0 0 0 6px rgba(242,140,40,.12)}
+.jnode .num{position:absolute;top:-4px;right:-4px;width:23px;height:23px;border-radius:50%;background:var(--canvas);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:.64rem;color:var(--text-secondary)}
+.jnode.lit .num{color:var(--accent-deep);border-color:rgba(242,140,40,.6)}
+.jnode h3{font-size:1.22rem;margin-bottom:7px;transition:color .7s var(--ease)}
+.jnode.lit h3{color:var(--accent-deep)}
+.jnode p{color:var(--text-secondary);max-width:56ch}
+.jtag{font-family:var(--mono);font-size:.62rem;letter-spacing:.19em;text-transform:uppercase;color:var(--text-secondary);text-align:right;padding-top:8px;white-space:nowrap;transition:color .7s var(--ease)}
+.jnode.lit .jtag{color:var(--accent-deep)}
+@media(max-width:860px){.jnode{grid-template-columns:58px 1fr;gap:16px}.jtag{display:none}.jmark{width:58px;height:58px}.jmark svg{width:26px;height:26px}}
+.jnote{margin-top:32px;font-size:.94rem;color:var(--text-secondary);border-left:3px solid var(--accent);padding-left:16px;max-width:64ch}
+
+/* --- possibility --- */
+.possible{text-align:center}
+.possible .wrap{display:grid;justify-items:center}
+.possible h2{max-width:none}
+.possible .body{max-width:52ch;margin-top:24px;display:grid;gap:16px;color:var(--text-secondary)}
+.maybe{display:grid;gap:10px;margin-top:32px;justify-items:center}
+.maybe span{font-family:var(--display);font-weight:700;font-size:clamp(1.1rem,2.1vw,1.5rem)}
+.maybe span:nth-child(1){opacity:.5}
+.maybe span:nth-child(2){opacity:.72}
+.maybe span:nth-child(3){color:var(--accent-deep)}
+
+/* --- marquee --- */
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;background:var(--canvas-lift)}
+.mtrack{display:flex;width:max-content;animation:march 42s linear infinite}
+.mtrack span{display:inline-flex;align-items:center;gap:16px;padding:0 26px;font-family:var(--mono);font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;color:var(--text-secondary);white-space:nowrap}
+.mtrack span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.8}
+@keyframes march{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* --- reviews --- */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+@media(max-width:900px){.reviews{grid-template-columns:1fr}}
+.rev{
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px 26px;
+  display:grid;gap:14px;align-content:start;box-shadow:0 2px 10px rgba(40,18,2,.05);
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease);
+}
+.rev:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(40,18,2,.10)}
+.rev .stars{color:var(--accent);letter-spacing:.2em;font-size:.95rem}
+.rev q{quotes:none;display:block;font-family:var(--display);font-weight:700;font-size:1.08rem;line-height:1.35}
+.rev .who{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary)}
+.rev.lead{grid-column:span 3;background:linear-gradient(150deg,#FFF3DE,#FFFCF6);border-color:rgba(242,140,40,.45)}
+.rev.lead q{font-size:clamp(1.3rem,2.6vw,1.9rem);max-width:22ch}
+@media(max-width:900px){.rev.lead{grid-column:span 1}}
+
+/* --- residential --- */
+.resi{display:grid;grid-template-columns:1fr 1fr;gap:20px 56px;margin-top:48px;align-items:start}
+@media(max-width:860px){.resi{grid-template-columns:1fr}}
+.resi ul{margin:0;padding:0;list-style:none;display:grid;gap:16px}
+.resi li{display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:baseline}
+.resi li::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--accent);transform:translateY(2px)}
+.resi li b{display:block;font-weight:600;margin-bottom:3px}
+.resi li span{color:var(--text-secondary);font-size:.95rem}
+.workshot{margin:0 0 20px;border-radius:20px;overflow:hidden;box-shadow:0 14px 40px rgba(35,46,34,.16)}
+.workshot img{width:100%;height:auto;display:block}
+.workshot figcaption{
+  background:var(--panel);border:1px solid var(--line);border-top:0;padding:14px 18px;
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);
+}
+.resipanel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px 30px;box-shadow:0 2px 10px rgba(35,46,34,.05)}
+.resipanel h3{font-size:1.3rem;margin-bottom:12px}
+.resipanel p{color:var(--text-secondary);font-size:.96rem}
+
+/* --- guide --- */
+.guide{background:linear-gradient(180deg,transparent,rgba(242,140,40,.08),transparent)}
+.guidegrid{display:grid;grid-template-columns:1fr 330px;gap:56px;align-items:center}
+@media(max-width:900px){.guidegrid{grid-template-columns:1fr;gap:34px}.plate{max-width:300px;margin-left:auto;margin-right:auto}}
+.plate{background:#fff;border-radius:24px;padding:24px;box-shadow:0 20px 56px rgba(40,18,2,.14);margin:0}
+.plate img{border-radius:12px}
+.plate figcaption{margin-top:14px;text-align:center;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#0B4F43;line-height:1.6}
+.qs{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.qs span{border:1px solid var(--line-strong);border-radius:999px;padding:9px 15px;font-size:.85rem;color:var(--text-secondary)}
+.posline{margin-top:28px;font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,2.2vw,1.65rem);line-height:1.24;max-width:24ch}
+.posline b{color:var(--accent-deep)}
+
+/* --- calculator --- */
+.calcbox{margin-top:48px;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel);box-shadow:0 12px 40px rgba(40,18,2,.08)}
+.calcgrid{display:grid;grid-template-columns:1.05fr .95fr}
+@media(max-width:900px){.calcgrid{grid-template-columns:1fr}}
+.calcleft{padding:34px 32px}
+.calcright{padding:34px 32px;border-left:1px solid var(--line);background:var(--canvas-lift)}
+@media(max-width:900px){.calcright{border-left:0;border-top:1px solid var(--line)}}
+.dial{position:relative;border-radius:16px;overflow:hidden;background:#0B2A24;border:1px solid var(--line);margin-bottom:24px}
+.dial svg{display:block;width:100%;height:auto}
+.billrow .lbl{font-family:var(--mono);font-size:.65rem;letter-spacing:.17em;text-transform:uppercase;color:var(--text-secondary)}
+.billval{font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,5vw,3.1rem);color:var(--accent-deep);line-height:1;letter-spacing:-.02em;margin-top:6px}
+.hint{font-size:.84rem;color:var(--text-secondary);margin-top:10px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;background:transparent;margin:20px 0 0;cursor:grab}
+input[type=range]:active{cursor:grabbing}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--accent) var(--fill,17%),rgba(27,58,49,.18) var(--fill,17%))}
+input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--accent) var(--fill,17%),rgba(27,58,49,.18) var(--fill,17%))}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:30px;height:30px;border-radius:50%;margin-top:-11px;
+  background:radial-gradient(circle at 35% 32%,#FFF2B8,#FFC53D 55%,#E08A00);
+  border:2px solid #fff;box-shadow:0 2px 10px rgba(40,18,2,.3);
+}
+input[type=range]::-moz-range-thumb{
+  width:26px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 35% 32%,#FFF2B8,#FFC53D 55%,#E08A00);
+  border:2px solid #fff;box-shadow:0 2px 10px rgba(40,18,2,.3);
+}
+.readout{display:grid;gap:18px}
+.ro{border-bottom:1px solid var(--line);padding-bottom:16px}
+.ro:last-child{border-bottom:0;padding-bottom:0}
+.ro .lbl{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:7px}
+.ro .val{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,3vw,2.05rem);line-height:1.05}
+.ro .val small{font-size:.5em;font-family:var(--mono);font-weight:500;color:var(--text-secondary);letter-spacing:.04em;margin-left:6px}
+.ro.hi .val{color:var(--accent-deep)}
+.assump{margin-top:24px;font-size:.82rem;color:var(--text-secondary);line-height:1.62;border-top:1px solid var(--line);padding-top:16px}
+.assump b{color:var(--text-primary);font-weight:600}
+.calccta{margin-top:24px}
+
+/* --- FAQ --- */
+.faq{display:grid;margin-top:44px;border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{
+  list-style:none;cursor:pointer;padding:22px 44px 22px 0;position:relative;
+  font-family:var(--display);font-weight:700;font-size:clamp(1.02rem,1.7vw,1.2rem);line-height:1.3;
+  transition:color .4s var(--ease);
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:hover{color:var(--accent-deep)}
+.qa summary::after{
+  content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;
+  border-right:2.4px solid var(--accent-deep);border-bottom:2.4px solid var(--accent-deep);
+  transform:translateY(-70%) rotate(45deg);transition:transform .45s var(--ease);
+}
+.qa[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.qa .ans{padding:0 44px 24px 0;color:var(--text-secondary);max-width:70ch;animation:fadein .5s var(--ease)}
+.qa .ans p + p{margin-top:12px}
+@keyframes fadein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* --- process --- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:48px}
+@media(max-width:940px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.step{position:relative;border:1px solid var(--line);border-radius:18px;padding:26px 24px;background:var(--panel);overflow:hidden;box-shadow:0 2px 10px rgba(40,18,2,.05)}
+.step .n{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;color:var(--accent-deep);display:block;margin-bottom:14px}
+.step h3{font-size:1.14rem;margin-bottom:8px}
+.step p{color:var(--text-secondary);font-size:.93rem}
+.step::before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--accent),transparent)}
+.shiftline{margin-top:32px;font-size:.95rem;color:var(--text-secondary)}
+.shiftline b{color:var(--accent-deep);font-weight:600}
+
+/* --- offer + form --- */
+.offer{background:linear-gradient(180deg,transparent,var(--canvas-lift))}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:48px;align-items:start}
+@media(max-width:900px){.formgrid{grid-template-columns:1fr;gap:36px}}
+form{display:grid;gap:16px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.f2{grid-template-columns:1fr}}
+label{display:grid;gap:7px;font-family:var(--mono);font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-secondary)}
+input[type=text],input[type=tel],input[type=email],select,textarea{
+  font-family:var(--body);font-size:.98rem;color:var(--text-primary);
+  background:#fff;border:1px solid var(--line-strong);border-radius:12px;
+  padding:14px 15px;width:100%;transition:border-color .4s var(--ease),box-shadow .4s var(--ease);
+}
+input:hover,select:hover,textarea:hover{border-color:var(--text-secondary)}
+input:focus,select:focus,textarea:focus{border-color:var(--accent-deep);outline:none;box-shadow:0 0 0 4px rgba(242,140,40,.18)}
+textarea{resize:vertical;min-height:96px}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--accent-deep) 50%),linear-gradient(135deg,var(--accent-deep) 50%,transparent 50%);background-position:calc(100% - 20px) 22px,calc(100% - 14px) 22px;background-size:6px 6px;background-repeat:no-repeat}
+.formnote{font-size:.84rem;color:var(--text-secondary)}
+.sent{border:1px solid rgba(242,140,40,.55);background:linear-gradient(150deg,#FFF3DE,#FFFCF6);border-radius:16px;padding:24px;display:none;gap:10px}
+.sent.show{display:grid;animation:fadein .5s var(--ease)}
+.sent h3{font-size:1.15rem;color:var(--accent-deep)}
+.sent p{color:var(--text-secondary);font-size:.95rem}
+.contactcard{display:grid;gap:14px;margin-top:26px}
+.contactcard a{
+  display:flex;align-items:center;gap:14px;text-decoration:none;
+  border:1px solid var(--line-strong);border-radius:14px;padding:16px 18px;background:var(--panel);
+  transition:border-color .45s var(--ease),transform .45s var(--ease),box-shadow .45s var(--ease);
+}
+.contactcard a:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:0 10px 26px rgba(40,18,2,.08)}
+.contactcard svg{width:20px;height:20px;color:var(--accent-deep);flex:none}
+.contactcard b{display:block;font-family:var(--body);font-weight:600;font-size:.98rem}
+.contactcard small{color:var(--text-secondary);font-family:var(--mono);font-size:.63rem;letter-spacing:.14em;text-transform:uppercase}
+
+/* --- community + footer --- */
+.community{text-align:center;padding-bottom:0}
+.community h2{max-width:18ch;margin:0 auto}
+.community .body{max-width:46ch;margin:24px auto 0;color:var(--text-secondary)}
+.yours{margin-top:38px;font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,3.4vw,2.4rem);letter-spacing:-.02em}
+.yours i{font-style:normal;color:var(--accent-deep)}
+
+footer{position:relative;z-index:2;margin-top:clamp(70px,9vw,120px);padding:60px 0 36px;background:#123A32;color:#DCE9E2}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px}
+@media(max-width:820px){.fgrid{grid-template-columns:1fr;gap:32px}}
+footer h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#9FBBB0;margin:0 0 16px;font-weight:500}
+footer .tag{font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--gold);margin-top:14px}
+footer p{color:#B7CCC3;font-size:.93rem;max-width:46ch;margin-top:12px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+footer ul a{color:#B7CCC3;text-decoration:none;font-size:.93rem;transition:color .35s var(--ease)}
+footer ul a:hover{color:var(--gold)}
+@media(pointer:coarse){footer ul a{display:inline-flex;align-items:center;justify-content:flex-start;min-height:44px}}
+.fbrand{display:flex;align-items:center;gap:13px;text-decoration:none}
+.legal{margin-top:44px;padding-top:22px;border-top:1px solid rgba(220,233,226,.18);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-size:.81rem;color:#9FBBB0}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;transition-delay:0s !important;
+  }
+  .rise,.stag > *{opacity:1 !important;transform:none !important}
+  .shift .arrow{transform:rotate(90deg) !important}
+  .jnode .jmark{color:var(--accent-ink);border-color:var(--accent);background:var(--gold)}
+  .jnode h3{color:var(--accent-deep)}
+  .cue{display:none}
+  .env::before{animation:none;transform:translate3d(0,0,0) scale(1.06)}
+  .spark{opacity:.9 !important}
+}
+body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused !important}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="env" aria-hidden="true"></div>
+
+<!-- ============================ NAV ============================ -->
+<nav class="nav" id="nav">
+  <a class="brand" href="#top">
+    <span class="brandmark"><img src="assets/mark.png" width="480" height="476" alt="EC Solar Solutions" fetchpriority="high" decoding="async"></span>
+    <span class="wordmark">
+      <b>EC Solar Solutions</b>
+      <i>Full Blast Energy, Zero Worries on Electric Bill</i>
+    </span>
+  </a>
+  <div class="navlinks">
+    <a href="#howitworks">How It Works</a>
+    <a href="#residential">Residential</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="btn btn-primary" href="#assessment">Get My Free Assessment</a>
+</nav>
+
+<span id="top"></span>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="hero" aria-label="EC Solar Solutions introduction">
+  <div class="stage" id="stage">
+
+    <!-- the hero footage: a real EC Solar installation, scrubbed by scroll -->
+    <div class="poster" id="poster" aria-hidden="true"></div>
+    <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
+    <div class="ringwrap" id="ringwrap" aria-hidden="true">
+      <svg viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/>
+      </svg>
+    </div>
+
+    <canvas class="motes" id="motes" aria-hidden="true"></canvas>
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="scrim-l" aria-hidden="true"></div>
+    <div class="scrim-b" aria-hidden="true"></div>
+
+    <div class="bands" id="bands">
+      <div class="band" id="band1" data-a="0" data-b="0.20" data-ramp="0.034">
+        <div class="bandtext">
+          <p class="kicker">For families tired of worrying about every electric bill</p>
+          <h1 class="e-drift" data-split="word" data-spread="0.42">Pagod ka na bang kabahan tuwing dumarating ang electricity bill mo?</h1>
+        </div>
+      </div>
+      <div class="band" id="band2" data-a="0.24" data-b="0.46">
+        <div class="bandtext e-blur">
+          <h2 class="soft" aria-hidden="true">Imagine opening your next bill with relief instead of dread.</h2>
+          <h2 class="sharp">Imagine opening your next bill with relief instead of dread.</h2>
+        </div>
+      </div>
+      <div class="band" id="band3" data-a="0.50" data-b="0.70">
+        <div class="bandtext">
+          <p class="micro e-scatter" data-split="char" data-spread="0.5">This is not about solar panels. It is about money that could stay with your family.</p>
+        </div>
+      </div>
+      <div class="band" id="band4" data-a="0.76" data-b="1.0">
+        <div class="bandtext">
+          <h2 class="e-rise" data-split="word" data-spread="0.5">Full blast energy. Zero worries on your electric bill.</h2>
+          <p class="sub e-rise-sub">EC Solar Solutions helps Filipino families take back control of their electricity costs, with a system designed around how your home actually uses power.</p>
+          <div class="row e-rise-cta">
+            <a class="btn btn-primary" href="#calculator">See What Solar Could Do For My Home</a>
+            <a class="btn btn-ghost" href="#howitworks">See How It Works</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cue" aria-hidden="true"><i></i>Scroll</div>
+  </div>
+</section>
+
+<!-- ============ STATIC HERO (phones, reduced motion) ============ -->
+<section class="statichero" id="statichero" aria-label="EC Solar Solutions introduction">
+  <div class="scene sposter" aria-hidden="true"></div>
+  <div class="fade" aria-hidden="true"></div>
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="scrim-l" aria-hidden="true"></div>
+  <div class="scrim-b" aria-hidden="true"></div>
+  <div class="inner">
+    <p class="kicker">For families tired of worrying about every electric bill</p>
+    <h1>Full blast energy. Zero worries on your electric bill.</h1>
+    <p class="sub">Imagine opening your next bill with relief instead of dread. EC Solar Solutions helps Filipino families take back control of their electricity costs.</p>
+    <div class="row">
+      <a class="btn btn-primary" href="#calculator">See What Solar Could Do For My Home</a>
+      <a class="btn btn-ghost" href="#howitworks">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MAIN ============================ -->
+<main id="main" tabindex="-1">
+
+  <div class="conductor" aria-hidden="true">
+    <svg viewBox="0 0 120 900" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="condgrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E0A800"/><stop offset="100%" stop-color="#B34A0C"/>
+        </linearGradient>
+      </defs>
+      <path class="cond-track" id="condTrack" d="M60 0 L60 120 L46 160 L46 300 L60 340 L60 520 L74 560 L74 700 L60 740 L60 900"/>
+      <path class="cond-live" id="condLive" d="M60 0 L60 120 L46 160 L46 300 L60 340 L60 520 L74 560 L74 700 L60 740 L60 900" pathLength="1000" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+      <circle class="cond-pulse" id="condPulse" r="3.6" cx="60" cy="0" opacity="0"/>
+    </svg>
+  </div>
+
+  <!-- ---------- WHY IT MATTERS ---------- -->
+  <section class="sec" id="why">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">Why this matters</p>
+        <h2>This is not really about electricity. It is about control.</h2>
+      </div>
+      <div class="grid4 stag">
+        <article class="card">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="20" cy="20" r="6"/><path d="M20 4v8M20 28v8M4 20h8M28 20h8M9 9l5.6 5.6M25.4 25.4L31 31M31 9l-5.6 5.6M14.6 25.4L9 31"/></svg>
+          <h3>Less stress</h3>
+          <p>Take the pressure off every time the electric bill arrives.</p>
+        </article>
+        <article class="card">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 4L9 22h9l-1 14 13-18h-9z"/></svg>
+          <h3>More control</h3>
+          <p>Use the sun above your roof as a power source you own.</p>
+        </article>
+        <article class="card">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 5l13 6v9c0 8-5.5 13-13 15C12.5 33 7 28 7 20v-9z"/><path d="M15 20l4 4 7-7"/></svg>
+          <h3>Peace of mind</h3>
+          <p>A system sized for what your home actually uses, not a guess.</p>
+        </article>
+        <article class="card">
+          <svg class="ic" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 34c8-4 12-10 12-17 0-2-1-4-3-4-3 0-5 3-9 3s-6-3-9-3c-2 0-3 2-3 4 0 7 4 13 12 17z"/><path d="M20 34V14"/></svg>
+          <h3>A better future</h3>
+          <p>Cleaner energy for your family and for the years ahead.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- WHY US ---------- -->
+  <section class="sec empathy" id="why-us">
+    <div class="wrap empathygrid">
+      <div class="ehead rise">
+        <h2>Why EC Solar Solutions?</h2>
+      </div>
+      <div class="body rise">
+        <p>You know the feeling. The bill arrives, and you already know it went up.</p>
+        <p>You are not only paying for electricity. You are also paying with money that could have gone to groceries, savings, tuition, a trip, repairs at home, or simply a more comfortable life.</p>
+        <p>And as the cost keeps climbing, it feels like you have no say in it.</p>
+        <p><em>But what if your roof could be part of the answer?</em></p>
+        <p>We want to help you find out whether solar really fits your home, your usage, and your budget.</p>
+        <p>The goal is not simply to own solar. The goal is to have more control over the energy your family depends on.</p>
+      </div>
+      <div class="shift stag">
+        <div class="side">
+          <p class="tag">Right now</p>
+          <q>How much is the bill this time?</q>
+          <p class="note">You open it already bracing for the number.</p>
+        </div>
+        <svg class="arrow" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 20h26M24 12l8 8-8 8"/></svg>
+        <div class="side after">
+          <p class="tag">With solar</p>
+          <q>How much did we save this month?</q>
+          <p class="note">You open it already knowing roughly what it says.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- HOW IT WORKS ---------- -->
+  <section class="sec" id="howitworks">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">How solar works</p>
+        <h2>You do not need to be an engineer to understand this.</h2>
+        <p class="lede">The sun already reaches your roof every day. Solar simply catches part of it and turns it into power your home can use. Here is the whole thing in six steps.</p>
+      </div>
+
+      <!-- the 3D model -->
+      <div class="explain rise" id="explain" data-step="1">
+        <div class="stage3d" id="stage3d" aria-hidden="true">
+          <div class="world">
+            <div class="ground"></div>
+            <div class="ring2"></div>
+            <div class="wall front"></div>
+            <div class="wall back"></div>
+            <div class="wall left"></div>
+            <div class="wall right"></div>
+            <div class="deck"></div>
+            <div class="mount"></div>
+            <div class="array3d"></div>
+            <div class="inverter"></div>
+            <div class="pole"></div>
+            <div class="crossarm"></div>
+            <div class="sun3d"></div>
+            <div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div>
+            <div class="spark s4"></div><div class="spark s5"></div><div class="spark s6"></div>
+          </div>
+        </div>
+        <div class="explainbar" aria-hidden="true">
+          <span>1 Sunlight</span><span>2 Panels</span><span>3 Inverter</span>
+          <span>4 Your home</span><span>5 Battery</span><span>6 The grid</span>
+        </div>
+      </div>
+      <p class="sr">A slowly rotating model of a house with solar panels on the roof, an inverter on the wall, and a power line to the grid. The part being described lights up as you read each step below.</p>
+
+      <div class="journey" id="journeyNodes">
+        <article class="jnode">
+          <div class="jmark"><span class="num">1</span>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="20" cy="20" r="8"/><path d="M20 3v6M20 31v6M3 20h6M31 20h6M8 8l4.2 4.2M27.8 27.8L32 32M32 8l-4.2 4.2M12.2 27.8L8 32"/></svg>
+          </div>
+          <div>
+            <h3>Sunlight hits your roof</h3>
+            <p>This happens every day, for free, whether you catch it or not. Across the year the Philippines gets roughly four and a half to five and a half hours of strong sun a day.</p>
+          </div>
+          <p class="jtag">Sunlight</p>
+        </article>
+
+        <article class="jnode">
+          <div class="jmark"><span class="num">2</span>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 28L12 10h16l6 18z"/><path d="M9 19h22M17 10l-3 18M23 10l3 18"/></svg>
+          </div>
+          <div>
+            <h3>The panels turn that light into electricity</h3>
+            <p>They make DC power. There are no moving parts and no noise. They simply sit on your roof and work while the sun is up.</p>
+          </div>
+          <p class="jtag">DC power</p>
+        </article>
+
+        <article class="jnode">
+          <div class="jmark"><span class="num">3</span>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="8" y="7" width="24" height="26" rx="4"/><path d="M14 15h12M14 21h12M18 27h4"/></svg>
+          </div>
+          <div>
+            <h3>The inverter changes it into power your home can use</h3>
+            <p>Your appliances run on AC, so the inverter converts the DC from the panels into AC. It is the brain of the system, and it also shows you how much your roof is producing.</p>
+          </div>
+          <p class="jtag">DC to AC</p>
+        </article>
+
+        <article class="jnode">
+          <div class="jmark"><span class="num">4</span>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 19L20 7l14 12"/><path d="M10 17v16h20V17"/><path d="M17 33V24h6v9"/></svg>
+          </div>
+          <div>
+            <h3>Your home uses it first</h3>
+            <p>Your fridge, lights, WiFi and aircon run on it. What your family uses during the day comes from your own roof instead of being bought from the grid.</p>
+          </div>
+          <p class="jtag">AC power</p>
+        </article>
+
+        <article class="jnode">
+          <div class="jmark"><span class="num">5</span>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="7" y="12" width="24" height="17" rx="3"/><path d="M31 18h3v5h-3"/><path d="M12 17v7M17 17v7M22 17v7"/></svg>
+          </div>
+          <div>
+            <h3>A battery can store the extra, if you need one</h3>
+            <p>A battery keeps some power for later, including during a brownout. Not every home needs one, and it adds real cost, so we will tell you straight if yours does not.</p>
+          </div>
+          <p class="jtag">Storage</p>
+        </article>
+
+        <article class="jnode">
+          <div class="jmark"><span class="num">6</span>
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 5v30M9 12h22M11 20h18M13 28h14"/><path d="M9 12l11 23 11-23"/></svg>
+          </div>
+          <div>
+            <h3>You stay connected to the grid</h3>
+            <p>At night and on dark days your home draws from the grid as usual. With net metering, extra daytime power can be sent back and credited on your bill.</p>
+          </div>
+          <p class="jtag">Net metering</p>
+        </article>
+      </div>
+
+      <p class="jnote">One thing we always say plainly: solar is not automatic backup during a brownout. A normal grid connected system switches off when the grid goes down. Only a hybrid or off grid system with a battery keeps your home running. We talk about this with you before you decide anything.</p>
+    </div>
+  </section>
+
+  <!-- ---------- POSSIBILITY ---------- -->
+  <section class="sec possible" id="possible">
+    <div class="wrap">
+      <div class="rise" style="text-align:center">
+        <h2>Imagine your home with solar.</h2>
+      </div>
+      <div class="body rise">
+        <p>A sunny morning. The fridge is running, the aircon is keeping everyone comfortable, the WiFi is on, and the power for all of it is coming from above your roof.</p>
+        <p>Then the bill arrives. Instead of asking why it went up again, you get to ask a better question.</p>
+      </div>
+      <div class="maybe stag">
+        <span>Maybe the extra goes to your children's education.</span>
+        <span>Maybe it goes to your family's next trip.</span>
+        <span>Or maybe it is just one less bill to worry about.</span>
+      </div>
+      <div class="rise" style="margin-top:42px">
+        <a class="btn btn-primary" href="#calculator">Show Me My Solar Potential</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- TRUST MARQUEE ---------- -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mtrack">
+      <span>Free Site Assessment</span><span>Professional Installation</span><span>Warranty Support</span><span>Flexible Financing</span><span>After-Sales Support</span>
+      <span>Free Site Assessment</span><span>Professional Installation</span><span>Warranty Support</span><span>Flexible Financing</span><span>After-Sales Support</span>
+      <span>Free Site Assessment</span><span>Professional Installation</span><span>Warranty Support</span><span>Flexible Financing</span><span>After-Sales Support</span>
+      <span>Free Site Assessment</span><span>Professional Installation</span><span>Warranty Support</span><span>Flexible Financing</span><span>After-Sales Support</span>
+    </div>
+  </div>
+
+  <!-- ---------- REVIEWS ---------- -->
+  <section class="sec" id="reviews">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">Customer reviews</p>
+        <h2>What Filipino families say after switching.</h2>
+      </div>
+      <div class="reviews stag">
+        <article class="rev lead">
+          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <q>Our bill went down from &#8369;9,000 to &#8369;900 a month.</q>
+          <p class="who">Rowena C., Cavite</p>
+        </article>
+        <article class="rev">
+          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <q>Best decision we made last year. The bill really went down and we are more comfortable with our energy setup.</q>
+          <p class="who">Jun D., Antipolo City</p>
+        </article>
+        <article class="rev">
+          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <q>The team was professional from consultation to installation. They explained clearly what suited our home.</q>
+          <p class="who">Alisha S., Cavite</p>
+        </article>
+        <article class="rev">
+          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <q>Worth every peso. The relationship did not end after installation. There is still follow up support.</q>
+          <p class="who">Roman G., Batangas</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- RESIDENTIAL ---------- -->
+  <section class="sec" id="residential">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">What we install</p>
+        <h2>Residential solar systems, built around your home.</h2>
+      </div>
+      <div class="resi">
+        <div class="rise">
+          <ul>
+            <li><span><b>Sized to your actual usage</b>We look at how much electricity your home really uses before we recommend anything.</span></li>
+            <li><span><b>Roof and site checked first</b>We inspect your roof and your property before designing the system.</span></li>
+            <li><span><b>High efficiency equipment</b>We offer equipment options and explain the difference in plain words.</span></li>
+            <li><span><b>Energy monitoring</b>Where the system you choose supports it, you can see what your roof is producing.</span></li>
+            <li><span><b>Built to your priorities and budget</b>The design follows what matters to your household, not a fixed package.</span></li>
+          </ul>
+        </div>
+        <div class="rise">
+          <figure class="workshot">
+            <img src="assets/reveal.jpg" width="1920" height="1080" alt="A rooftop solar array installed by EC Solar Solutions, seen from above with fields and water beyond" loading="lazy" decoding="async">
+            <figcaption>An EC Solar installation, and the view from the roof it sits on.</figcaption>
+          </figure>
+          <div class="resipanel">
+            <h3>Not sure where to start?</h3>
+            <p>Most families begin with one question: is this worth it for our house? The free assessment answers exactly that. We look at your bill, your roof and your daily routine, then show you the numbers for your home.</p>
+            <div class="calccta"><a class="btn btn-primary" href="#assessment">Get My Free Assessment</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- GUIDE ---------- -->
+  <section class="sec guide" id="guide">
+    <div class="wrap guidegrid">
+      <div class="rise">
+        <h2>You do not have to figure solar out alone.</h2>
+        <p class="lede" style="margin-top:20px">Choosing solar can feel overwhelming. That is where we come in. We help Filipino homeowners understand how much power they use, check their property, and choose a system based on what they actually need.</p>
+        <div class="qs">
+          <span>How many panels do I need?</span>
+          <span>Do I need a battery?</span>
+          <span>Will it run my aircon?</span>
+          <span>What happens during a brownout?</span>
+          <span>How much can I really save?</span>
+        </div>
+        <p class="lede" style="margin-top:22px">We do not just install. We guide you from your first question to the first day your system starts producing power.</p>
+        <p class="posline">Your family is building the future. <b>We are here to help you power it.</b></p>
+      </div>
+      <figure class="plate rise">
+        <img src="assets/logo.png" width="1254" height="1254" alt="The EC Solar Solutions logo" loading="lazy" decoding="async">
+        <figcaption>Full Blast Energy,<br>Zero Worries on Electric Bill</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ---------- CALCULATOR ---------- -->
+  <section class="sec calc" id="calculator">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">Solar potential calculator</p>
+        <h2>See what solar could do for your home.</h2>
+        <p class="lede">Drag the slider to your usual monthly bill. As the bill goes up, so does the sunlight your roof is not catching yet. This is an estimate, and every number behind it is written below.</p>
+      </div>
+
+      <div class="calcbox rise">
+        <div class="calcgrid">
+          <div class="calcleft">
+            <div class="dial" aria-hidden="true">
+              <svg viewBox="0 0 600 260" id="dialSvg">
+                <defs>
+                  <linearGradient id="dsky" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#123A32"/><stop offset="100%" stop-color="#0B2A24"/>
+                  </linearGradient>
+                  <radialGradient id="dsun" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FFF6D0"/><stop offset="45%" stop-color="#FFD24A"/><stop offset="100%" stop-color="#F2820F"/>
+                  </radialGradient>
+                </defs>
+                <rect width="600" height="260" fill="url(#dsky)"/>
+                <path id="dialGlow" d="M0 0h600v260H0z" fill="rgba(255,197,61,0)"/>
+                <path d="M60 236 Q300 16 540 236" fill="none" stroke="rgba(255,197,61,.3)" stroke-width="1.6" stroke-dasharray="3 8" stroke-linecap="round"/>
+                <text x="24" y="30" fill="rgba(240,223,196,.7)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4">SUNLIGHT NOT YET CAUGHT</text>
+                <g id="dialRays" opacity="0">
+                  <path d="M300 96 L214 226" stroke="rgba(255,214,130,.3)" stroke-width="16" stroke-linecap="round"/>
+                  <path d="M300 96 L300 226" stroke="rgba(255,214,130,.26)" stroke-width="22" stroke-linecap="round"/>
+                  <path d="M300 96 L386 226" stroke="rgba(255,214,130,.3)" stroke-width="16" stroke-linecap="round"/>
+                </g>
+                <path d="M196 236 L300 176 L404 236 Z" fill="#0B4F43"/>
+                <path d="M214 232 L300 182 L386 232 L300 240 Z" fill="#1B5C79" stroke="rgba(214,235,228,.34)" stroke-width="1.2"/>
+                <g stroke="rgba(214,235,228,.26)" stroke-width="1" fill="none">
+                  <path d="M236 219 L364 219"/><path d="M258 206 L342 206"/>
+                  <path d="M256 236 L286 182"/><path d="M300 236 L300 182"/><path d="M344 236 L314 182"/>
+                </g>
+                <g id="dialSun">
+                  <circle r="52" fill="rgba(255,197,61,.16)"/>
+                  <circle r="30" fill="rgba(255,197,61,.24)"/>
+                  <circle r="19" fill="url(#dsun)"/>
+                </g>
+                <rect x="0" y="248" width="600" height="14" fill="#08211C"/>
+              </svg>
+            </div>
+
+            <div class="billrow"><span class="lbl">Your average monthly electric bill</span></div>
+            <div class="billval" id="billOut">&#8369;6,000</div>
+            <label for="bill" class="sr">Average monthly electricity bill in pesos</label>
+            <input type="range" id="bill" min="1000" max="30000" step="500" value="6000" aria-describedby="billOut">
+            <p class="hint">From &#8369;1,000 to &#8369;30,000 a month. You can also use the arrow keys.</p>
+          </div>
+
+          <div class="calcright">
+            <div class="readout">
+              <div class="ro">
+                <span class="lbl">Estimated power you use</span>
+                <span class="val" id="outKwh">406<small>kWh per month</small></span>
+              </div>
+              <div class="ro">
+                <span class="lbl">Suggested system size</span>
+                <span class="val" id="outKw">1.5<small>kWp</small></span>
+              </div>
+              <div class="ro hi">
+                <span class="lbl">Possible drop in your monthly bill</span>
+                <span class="val" id="outSave">&#8369;2,400 to &#8369;4,200</span>
+              </div>
+              <div class="ro hi">
+                <span class="lbl">Over one year</span>
+                <span class="val" id="outYear">&#8369;28,800 to &#8369;50,400</span>
+              </div>
+            </div>
+
+            <p class="assump">
+              <b>Where the numbers come from.</b> Your power use is your bill divided by &#8369;14.7833 per kWh. The system size assumes about 4.8 hours of strong sun a day and the share of power a home usually uses while the sun is up. The savings range is 40 to 70 percent, because the real figure depends on when your family uses power, how big your roof is, and how big the system is.
+              <b>This is an estimate, not a quotation.</b> The free assessment gives you the real numbers for your own home.
+            </p>
+
+            <div class="calccta"><a class="btn btn-primary" href="#assessment">Get My Free Assessment</a></div>
+            <p class="hint" style="margin-top:14px">Want us to make this estimate accurate for your actual home?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- FAQ ---------- -->
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">Answers</p>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq stag">
+        <details class="qa"><summary>Is solar really worth it for my home?</summary>
+          <div class="ans"><p>It depends on how much electricity you use. The bigger your monthly bill, the faster solar pays for itself, because you are replacing power you are already buying. Homes with small bills wait longer to break even. That is why we look at your real usage before recommending any system.</p></div>
+        </details>
+        <details class="qa"><summary>How much can my bill go down?</summary>
+          <div class="ans"><p>A grid connected system covers the power your home uses while the sun is up. How much of your bill that removes depends on when your family uses electricity, how big the system is, and how much usable roof you have. We give you a real number for your home after the site assessment rather than a percentage from a brochure.</p></div>
+        </details>
+        <details class="qa"><summary>What happens when it rains?</summary>
+          <div class="ans"><p>The panels keep working, just at lower output. Clouds and the rainy season reduce production, they do not switch it off. A system is sized around the yearly average of about four and a half to five and a half hours of strong sun a day, not around perfect weather.</p></div>
+        </details>
+        <details class="qa"><summary>What happens during a brownout?</summary>
+          <div class="ans">
+            <p>This is the most important answer, so we will say it plainly. A normal grid connected system switches itself off during a brownout. That is a safety rule, not a fault. It stops your power from flowing into lines that repair crews may be working on.</p>
+            <p>Only a hybrid or off grid system with a battery keeps your home running while the grid is down. If staying powered during brownouts matters to you, tell us early, because it changes the system we design.</p>
+          </div>
+        </details>
+        <details class="qa"><summary>Do I need a battery?</summary>
+          <div class="ans"><p>Not if you only want a lower bill. A grid connected system reduces your bill without one. You need a battery for two reasons: you want power during brownouts, or your family uses most of its electricity at night. Batteries add real cost, so we only recommend one when your answers call for it.</p></div>
+        </details>
+        <details class="qa"><summary>Can solar run my aircon?</summary>
+          <div class="ans"><p>Yes, if the system is sized for it. Aircon is usually the biggest load in a Filipino home, and it runs in the afternoon when the sun is strongest, which works in your favour. We count your aircon and everything else during the assessment so the system matches how your home really runs.</p></div>
+        </details>
+        <details class="qa"><summary>What happens to extra electricity?</summary>
+          <div class="ans">
+            <p>Under net metering, a home system can send surplus daytime power back to the grid and receive credits on your bill. The application goes through your utility, and we guide you through the paperwork.</p>
+            <p>One honest detail: the credit is based on the utility's generation rate, which is lower than the full retail rate you pay. So exporting is a bonus, not the main saving. The main saving comes from using your own power directly.</p>
+          </div>
+        </details>
+        <details class="qa"><summary>How long does installation take?</summary>
+          <div class="ans"><p>The installation itself is usually short once the design is final. The overall schedule depends on your roof, the size of the system, and your utility's process. We put the dates in writing before we start, and we tell you straight away if anything moves.</p></div>
+        </details>
+        <details class="qa"><summary>What maintenance does it need?</summary>
+          <div class="ans"><p>Very little. Panels have no moving parts. They need occasional cleaning, especially after a long dry spell or if there is ash or dust in the air, and the inverter should be checked from time to time. We tell you exactly what your equipment needs and what we handle for you.</p></div>
+        </details>
+        <details class="qa"><summary>What warranty and support do I get?</summary>
+          <div class="ans"><p>The warranty comes from the specific panels and inverter in your design, so we put the terms in writing with your quotation instead of promising a single number here. After sales support is not an add on for us. It is the fourth of our four steps.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- PROCESS ---------- -->
+  <section class="sec" id="process">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">The process</p>
+        <h2>Four simple steps to solar</h2>
+      </div>
+      <div class="steps stag">
+        <article class="step"><span class="n">01</span><h3>Discover</h3><p>A free consultation and site visit, so we understand what your property needs.</p></article>
+        <article class="step"><span class="n">02</span><h3>Design</h3><p>A system recommendation based on your usage, your property and your budget.</p></article>
+        <article class="step"><span class="n">03</span><h3>Install</h3><p>Professional installation, with clear updates from us throughout.</p></article>
+        <article class="step"><span class="n">04</span><h3>Support</h3><p>We keep an eye on your system and support you after installation.</p></article>
+      </div>
+      <p class="shiftline rise">From <b>"I am not sure solar fits our house"</b> to <b>"I know what the next step is."</b></p>
+    </div>
+  </section>
+
+  <!-- ---------- OFFER + FORM ---------- -->
+  <section class="sec offer" id="assessment">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <h2>What would you do with the money you could save?</h2>
+        <p class="lede">Maybe your child's education. Maybe your family's next trip. Maybe your emergency fund. Or maybe just one less bill to worry about. Either way, it starts with understanding your home's energy.</p>
+      </div>
+
+      <div class="formgrid">
+        <div class="rise">
+          <form id="leadForm" novalidate>
+            <div class="f2">
+              <label>Full Name<input type="text" name="name" id="fName" autocomplete="name" required></label>
+              <label>Mobile Number<input type="tel" name="phone" id="fPhone" autocomplete="tel" required></label>
+            </div>
+            <div class="f2">
+              <label>Email Address<input type="email" name="email" id="fEmail" autocomplete="email" required></label>
+              <label>City / Location<input type="text" name="city" id="fCity" autocomplete="address-level2" required></label>
+            </div>
+            <div class="f2">
+              <label>Average Monthly Electric Bill<input type="text" name="bill" id="fBill" inputmode="numeric" placeholder="&#8369;6,000"></label>
+              <label>Property Type
+                <select name="ptype" id="fType">
+                  <option>House</option><option>Apartment</option><option>Business</option><option>Other</option>
+                </select>
+              </label>
+            </div>
+            <label>Message or Question (Optional)<textarea name="msg" id="fMsg" rows="3"></textarea></label>
+            <button class="btn btn-primary" type="submit" style="justify-self:start">
+              See My Solar Potential
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="formnote">We will use your details to prepare your assessment and to contact you about your solar enquiry. No pressure and no obligation. Just a clearer picture of what solar could look like for your home.</p>
+          </form>
+
+          <div class="sent" id="sent" role="status" aria-live="polite" tabindex="-1">
+            <h3>Your message is ready to send.</h3>
+            <p>Your email app should have opened with the message already written for us. Press send and we will get back to you. If nothing opened, just call the number beside this. That is often faster anyway.</p>
+          </div>
+        </div>
+
+        <div class="rise">
+          <h3 style="font-size:1.2rem;margin-bottom:6px">Would you rather call?</h3>
+          <p class="lede" style="font-size:.95rem">We are happy to answer questions even if you are not ready to decide.</p>
+          <div class="contactcard">
+            <a href="tel:+639940257286">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 3h4l2 5-3 2a12 12 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 5a2 2 0 012-2z"/></svg>
+              <span><small>Call us</small><b>+63 994 025 7286</b></span>
+            </a>
+            <a href="mailto:ecsolarsolutions01@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <span><small>Email us</small><b>ecsolarsolutions01@gmail.com</b></span>
+            </a>
+            <a href="#howitworks">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+              <span><small>Not ready yet</small><b>Read how solar works first</b></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- COMMUNITY ---------- -->
+  <section class="sec community" id="community">
+    <div class="wrap">
+      <div class="rise"><h2>Welcome to a smarter energy future.</h2></div>
+      <div class="body rise">
+        <p>You are not just installing panels. You are joining a growing group of Filipino homeowners who are choosing to be more deliberate about the energy their families use.</p>
+      </div>
+      <p class="yours rise">Your home. Your family. <i>Your energy.</i></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <a class="fbrand" href="#top">
+        <span class="brandmark"><img src="assets/mark.png" width="480" height="476" alt="EC Solar Solutions" loading="lazy" decoding="async"></span>
+        <b style="font-family:var(--display);font-size:1.02rem;color:#fff">EC Solar Solutions</b>
+      </a>
+      <p class="tag">Full Blast Energy, Zero Worries on Electric Bill</p>
+      <p>We help Filipino homeowners understand and manage their electricity costs with solar systems designed around their real needs.</p>
+    </div>
+    <div>
+      <h4>Contact us</h4>
+      <ul>
+        <li><a href="tel:+639940257286">+63 994 025 7286</a></li>
+        <li><a href="mailto:ecsolarsolutions01@gmail.com">ecsolarsolutions01@gmail.com</a></li>
+        <li><span style="color:#B7CCC3;font-size:.93rem">Philippines</span></li>
+      </ul>
+    </div>
+    <div>
+      <h4>On this site</h4>
+      <ul>
+        <li><a href="#howitworks">How solar works</a></li>
+        <li><a href="#residential">Residential solar</a></li>
+        <li><a href="#calculator">Solar potential calculator</a></li>
+        <li><a href="#faq">Frequently asked questions</a></li>
+        <li><a href="#assessment">Free assessment</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <span>&copy; 2026 EC Solar Solutions. All Rights Reserved.</span>
+    <span>Figures on this site are estimates for guidance. Exact numbers, warranty and financing are set out in your quotation.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+var clamp = function(v,lo,hi){ return Math.min(hi,Math.max(lo,v)); };
+var smoothstep = function(p,e0,e1){ var t = clamp((p-e0)/(e1-e0),0,1); return t*t*(3-2*t); };
+function rng(seed){ var s = seed>>>0; return function(){ s = (s*1664525+1013904223)>>>0; return s/4294967296; }; }
+
+/* ---------- text splitting, seeded so it never shuffles ---------- */
+function splitText(el){
+  var mode = el.getAttribute('data-split');
+  var spread = parseFloat(el.getAttribute('data-spread') || '0.45');
+  var text = el.textContent;
+  var rand = rng(text.length * 7919 + 13);
+  var sr = document.createElement('span'); sr.className='sr'; sr.textContent=text;
+  var vis = document.createElement('span'); vis.setAttribute('aria-hidden','true');
+  var words = text.split(' ');
+  words.forEach(function(word, wi){
+    var w = document.createElement('span'); w.className='w';
+    if (mode === 'word'){
+      w.style.setProperty('--th',(wi/Math.max(1,words.length-1)*spread).toFixed(4));
+      w.textContent = word;
+    } else {
+      for (var i=0;i<word.length;i++){
+        var c=document.createElement('span'); c.className='c'; c.textContent=word[i];
+        c.style.setProperty('--th',(rand()*spread).toFixed(4));
+        c.style.setProperty('--jx',((rand()*2-1)*46).toFixed(1)+'px');
+        c.style.setProperty('--jy',((rand()*2-1)*38).toFixed(1)+'px');
+        c.style.setProperty('--jr',((rand()*2-1)*22).toFixed(1)+'deg');
+        w.appendChild(c);
+      }
+    }
+    vis.appendChild(w);
+    if (wi < words.length-1) vis.appendChild(document.createTextNode(' '));
+  });
+  el.textContent=''; el.appendChild(sr); el.appendChild(vis);
+}
+[].forEach.call(document.querySelectorAll('[data-split]'), splitText);
+
+/* ---------- hero drive ---------- */
+var hero=document.getElementById('hero'), stage=document.getElementById('stage'), motes=document.getElementById('motes');
+var video=document.getElementById('hero-video');
+var posterEl=document.getElementById('poster');
+var ring=document.querySelector('#ringwrap circle');
+
+var VIDEO_URL='assets/hero-scrub.mp4';
+var VIDEO_BYTES=13379633;         // the real byte size, used when Content-Length is missing
+var POSTER_URL='assets/hero-poster.jpg';
+
+/* Seek gating. Never write currentTime while a seek is in flight: un-gated
+   seeks pile up and that is the difference between smooth and choppy. */
+var seekBusy=false, pendingTime=null, lastSeekT=-1;
+var SEEK_EPS=0.02;                 // half a frame at 24fps: below this nobody can see the difference
+function requestSeek(t){
+  if(!video || !video.duration) return;
+  if(Math.abs(t-lastSeekT)<SEEK_EPS) return;   // skip seeks too small to be visible
+  if(seekBusy){ pendingTime=t; return; }
+  seekBusy=true; lastSeekT=t;
+  // fastSeek lands on the nearest keyframe far quicker; with a keyframe every
+  // 4 frames that is within a sixth of a second, and it is a large win where supported
+  if(video.fastSeek) video.fastSeek(t); else video.currentTime=t;
+}
+if(video){
+  video.addEventListener('seeked',function(){
+    seekBusy=false;
+    if(pendingTime!==null){ var t=pendingTime; pendingTime=null; requestSeek(t); }
+  });
+  video.addEventListener('error',function(){   // the deadlock escape
+    seekBusy=false; pendingTime=null; failVideo();
+  });
+}
+
+function failVideo(){
+  if(stage) stage.classList.add('video-failed');   // the poster carries the whole journey
+}
+
+/* Stream the file as a Blob. Hosts often lack partial-download support, which
+   makes every seek clamp to zero on the live site while working locally. */
+function loadHeroBlob(){
+  var ctrl=new AbortController();
+  var watchdog=setTimeout(function(){ ctrl.abort(); },20000);
+  return fetch(VIDEO_URL,{priority:'low',signal:ctrl.signal}).then(function(res){
+    if(!res.ok || !res.body) throw new Error('bad response');
+    var total=Number(res.headers.get('Content-Length'))||VIDEO_BYTES;
+    var reader=res.body.getReader(), chunks=[], got=0, lastRing=0;
+    function pump(){
+      return reader.read().then(function(r){
+        if(r.done) return;
+        clearTimeout(watchdog);
+        watchdog=setTimeout(function(){ ctrl.abort(); },20000);   // 20s with no progress aborts
+        chunks.push(r.value); got+=r.value.length;
+        var frac=Math.min(1,got/total), now=performance.now();
+        if(ring && (now-lastRing>100 || frac===1)){
+          lastRing=now;
+          ring.style.setProperty('--ld',Math.round(126*(1-frac)));
+        }
+        return pump();
+      });
+    }
+    return pump().then(function(){
+      clearTimeout(watchdog);
+      if(ring) ring.style.setProperty('--ld',0);
+      video.src=URL.createObjectURL(new Blob(chunks,{type:'video/mp4'}));
+      video.load();
+      video.addEventListener('canplay',function(){
+        requestSeek(heroProgress()*video.duration);   // land on where the visitor already is
+        stage.classList.add('video-ready');
+      },{once:true});
+    });
+  });
+}
+
+/* The poster wins the bandwidth race on purpose: paint it first, then stream. */
+var blobStarted=false;
+function startBlobFetch(){
+  if(blobStarted) return; blobStarted=true;
+  loadHeroBlob().catch(failVideo);
+}
+function initVideoOnce(){
+  if(!video || !posterEl) return;
+  posterEl.style.backgroundImage="url('"+POSTER_URL+"')";
+  var img=new Image();
+  img.onload=startBlobFetch;
+  img.onerror=startBlobFetch;
+  img.src=POSTER_URL;
+  setTimeout(startBlobFetch,4000);   // a hung poster never blocks the film forever
+}
+var bandEls=[].slice.call(document.querySelectorAll('#bands .band'));
+var bands=bandEls.map(function(el){
+  return { el:el, a:parseFloat(el.getAttribute('data-a')), b:parseFloat(el.getAttribute('data-b')),
+           ramp:parseFloat(el.getAttribute('data-ramp')||'0')||0, op:-1, k:-1 };
+});
+var target=0, shown=0, rafId=null, lastTick=0, heroOnScreen=true, loadK=0, loadStart=0, scrubOn=false;
+var SMOOTH=0.115;   // easing toward the scroll position; lower reads more fluid, higher more immediate
+
+function heroProgress(){
+  if(!hero) return 0;
+  var r=hero.getBoundingClientRect(), range=hero.offsetHeight-window.innerHeight;
+  if(range<=0) return 0;
+  return clamp(-r.top/range,0,1);
+}
+function setP(v){ var q=Math.round(v*1000)/1000; if(setP.last===q) return; setP.last=q; stage.style.setProperty('--p',q); }
+setP.last=-1;
+
+function updateCaptions(p){
+  for(var i=0;i<bands.length;i++){
+    var b=bands[i], f=Math.min(0.02,(b.b-b.a)/3);
+    var inEase=(i===0)?1:smoothstep(p,b.a,b.a+f);
+    var outEase=(i===bands.length-1)?1:(1-smoothstep(p,b.b-f,b.b));
+    var op=inEase*outEase;
+    var ramp=b.ramp||Math.min(0.025,(b.b-b.a)*0.35);
+    var k=clamp((p-b.a)/ramp,0,1);
+    if(i===0) k=Math.max(k,loadK);
+    var opq=Math.round(op*1000)/1000;
+    if(opq!==b.op){ b.op=opq; b.el.style.opacity=opq;
+      var on=opq>0.5; if(on!==b.on){ b.on=on; b.el.classList.toggle('on',on); } }
+    var kq=Math.round(k*125)/125;
+    if(kq!==b.k){ b.k=kq; b.el.style.setProperty('--k',kq); }
+  }
+}
+function tick(now){
+  var dt=Math.min(100, now-(lastTick||now)); lastTick=now;
+  shown += (target-shown)*(1-Math.pow(1-SMOOTH, dt/16.667));
+  var loadDone=true;
+  if(loadStart){ loadK=clamp((now-loadStart)/900,0,1); loadK=loadK*loadK*(3-2*loadK); loadDone=loadK>=1; }
+  if(Math.abs(target-shown)<0.0005 && loadDone){ shown=target; rafId=null; lastTick=0; }
+  else rafId=requestAnimationFrame(tick);
+  setP(shown); updateCaptions(shown);
+  if(video && video.duration) requestSeek(shown*video.duration);
+}
+function onScroll(){ target=heroProgress(); if(rafId===null && heroOnScreen) rafId=requestAnimationFrame(tick); }
+
+/* ---------- motes ---------- */
+var moteCtx=null, moteParts=[], moteRaf=null, moteW=0, moteH=0;
+function moteInit(){
+  if(!motes) return;
+  moteCtx=motes.getContext('2d'); moteResize();
+  var r=rng(4242); moteParts=[];
+  for(var i=0;i<46;i++) moteParts.push({x:r(),y:r(),s:0.6+r()*1.9,v:0.06+r()*0.18,d:r()*6.28,o:0.15+r()*0.4});
+}
+function moteResize(){
+  if(!motes) return;
+  var dpr=Math.min(2,window.devicePixelRatio||1);
+  moteW=motes.clientWidth; moteH=motes.clientHeight;
+  motes.width=Math.round(moteW*dpr); motes.height=Math.round(moteH*dpr);
+  if(moteCtx) moteCtx.setTransform(dpr,0,0,dpr,0,0);
+}
+function moteFrame(t){
+  if(!moteCtx||!heroOnScreen||document.hidden){ moteRaf=null; return; }
+  moteCtx.clearRect(0,0,moteW,moteH);
+  for(var i=0;i<moteParts.length;i++){
+    var p=moteParts[i];
+    var y=(p.y+(t*0.00004*p.v*8))%1;
+    var x=p.x+Math.sin(t*0.0003+p.d)*0.012;
+    moteCtx.beginPath(); moteCtx.arc(x*moteW,(1-y)*moteH,p.s,0,6.2832);
+    moteCtx.fillStyle='rgba(255,210,120,'+p.o+')'; moteCtx.fill();
+  }
+  moteRaf=requestAnimationFrame(moteFrame);
+}
+function moteStart(){ if(moteRaf===null&&moteCtx) moteRaf=requestAnimationFrame(moteFrame); }
+function moteStop(){ if(moteRaf!==null){ cancelAnimationFrame(moteRaf); moteRaf=null; } }
+
+/* ---------- the five gates, live ---------- */
+var GATES=[
+  '(max-width: 720px)',
+  '(orientation: portrait) and (max-width: 1024px)',
+  '(orientation: portrait) and (pointer: coarse)',
+  '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)',
+  '(prefers-reduced-motion: reduce)'
+];
+var MQLS=GATES.map(function(q){ return window.matchMedia(q); });
+var heroInit=false;
+function initHeroOnce(){
+  if(heroInit) return; heroInit=true;
+  moteInit(); initVideoOnce(); loadStart=performance.now();
+  if(hero){
+    var io=new IntersectionObserver(function(es){
+      heroOnScreen=es[0].isIntersecting;
+      if(heroOnScreen){ moteStart(); onScroll(); } else moteStop();
+    },{threshold:0});
+    io.observe(hero);
+  }
+}
+function enableScrub(){
+  if(scrubOn) return; scrubOn=true;
+  initHeroOnce();
+  window.addEventListener('scroll',onScroll,{passive:true});
+  bands.forEach(function(b){ b.op=-1; b.k=-1; b.on=undefined; });
+  unpinFinalStates();
+  target=shown=heroProgress(); setP.last=-1; setP(shown); updateCaptions(shown);
+  if(video && video.duration) requestSeek(shown*video.duration);
+  moteStart(); onScroll();
+}
+function disableScrub(){
+  if(!scrubOn) return; scrubOn=false;
+  window.removeEventListener('scroll',onScroll);
+  if(rafId!==null){ cancelAnimationFrame(rafId); rafId=null; }
+  moteStop();
+}
+function applyHeroMode(){ if(MQLS.some(function(m){return m.matches})) disableScrub(); else enableScrub(); }
+MQLS.forEach(function(m){
+  if(m.addEventListener) m.addEventListener('change',applyHeroMode);
+  else if(m.addListener) m.addListener(applyHeroMode);
+});
+window.addEventListener('resize',function(){ moteResize(); onScroll(); },{passive:true});
+
+/* ---------- nav ---------- */
+var nav=document.getElementById('nav'), navTick=false;
+window.addEventListener('scroll',function(){
+  if(navTick) return; navTick=true;
+  requestAnimationFrame(function(){
+    navTick=false;
+    var want=window.scrollY>40;
+    if(want!==nav.classList.contains('stuck')) nav.classList.toggle('stuck',want);
+  });
+},{passive:true});
+
+/* ---------- entrances ---------- */
+var entIO=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting) return;
+    var el=e.target; el.classList.add('in'); entIO.unobserve(el);
+    if(el.classList.contains('stag')){
+      var kids=el.children.length;
+      setTimeout(function(){ el.classList.add('done'); }, 900+kids*95);
+    }
+  });
+},{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+[].forEach.call(document.querySelectorAll('.rise, .stag'), function(el){ entIO.observe(el); });
+
+/* ---------- the conductor ---------- */
+var condLive=document.getElementById('condLive'), condPulse=document.getElementById('condPulse'), condTrack=document.getElementById('condTrack');
+var condLen=1000, condPathLen=0, condTicking=false, condLast=-1, condPinned=false;
+if(condTrack && condTrack.getTotalLength) condPathLen=condTrack.getTotalLength();
+function drawConductor(){
+  if(!condLive || condPinned) return;
+  var doc=document.documentElement, max=doc.scrollHeight-window.innerHeight;
+  var p=max>0?clamp(window.scrollY/max,0,1):0;
+  var q=Math.round(p*400)/400;
+  if(q===condLast) return;
+  condLast=q;
+  condLive.style.strokeDashoffset=(condLen*(1-q)).toFixed(1);
+  if(condPulse && condPathLen){
+    var pt=condTrack.getPointAtLength(condPathLen*q);
+    condPulse.setAttribute('cx',pt.x.toFixed(1));
+    condPulse.setAttribute('cy',pt.y.toFixed(1));
+    condPulse.setAttribute('opacity', q>0.005 && q<0.998 ? '1':'0');
+  }
+}
+window.addEventListener('scroll',function(){
+  if(condTicking) return; condTicking=true;
+  requestAnimationFrame(function(){ condTicking=false; drawConductor(); });
+},{passive:true});
+
+/* ---------- the steps light the 3D model ---------- */
+var explain=document.getElementById('explain');
+var stage3d=document.getElementById('stage3d');
+var jnodes=[].slice.call(document.querySelectorAll('#journeyNodes .jnode'));
+var jIO=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting) return;
+    e.target.classList.add('lit');
+    var idx=jnodes.indexOf(e.target)+1;
+    if(explain && idx>0) explain.setAttribute('data-step',String(idx));
+  });
+},{threshold:0.5, rootMargin:'0px 0px -18% 0px'});
+jnodes.forEach(function(n){ jIO.observe(n); });
+
+/* the 3D world only spins while it is on screen */
+if(stage3d){
+  var sIO=new IntersectionObserver(function(es){
+    stage3d.classList.toggle('spinning', es[0].isIntersecting);
+  },{threshold:0.05});
+  sIO.observe(stage3d);
+}
+
+/* ---------- the calculator ---------- */
+var bill=document.getElementById('bill'), billOut=document.getElementById('billOut');
+var outKwh=document.getElementById('outKwh'), outKw=document.getElementById('outKw');
+var outSave=document.getElementById('outSave'), outYear=document.getElementById('outYear');
+var dialSun=document.getElementById('dialSun'), dialRays=document.getElementById('dialRays'), dialGlow=document.getElementById('dialGlow');
+
+var RATE=14.7833;      // pesos per kWh, printed on screen
+var PSH=4.8;           // hours of strong sun per day, printed on screen
+var DAYTIME_SHARE=0.55;
+var SAVE_LO=0.40, SAVE_HI=0.70;
+function peso(n){ return '₱' + Math.round(n).toLocaleString('en-PH'); }
+var calcLast=-1;
+function updateCalc(){
+  if(!bill) return;
+  var v=parseInt(bill.value,10);
+  if(v===calcLast) return;
+  calcLast=v;
+  var frac=(v-bill.min)/(bill.max-bill.min);
+  bill.style.setProperty('--fill',(frac*100).toFixed(1)+'%');
+  var kwh=v/RATE;
+  var kw=(kwh*DAYTIME_SHARE)/(30*PSH);
+  kw=Math.max(1.5, Math.round(kw*2)/2);
+  billOut.textContent=peso(v);
+  outKwh.innerHTML=Math.round(kwh)+'<small>kWh per month</small>';
+  outKw.innerHTML=kw.toFixed(1)+'<small>kWp</small>';
+  outSave.textContent=peso(v*SAVE_LO)+' to '+peso(v*SAVE_HI);
+  outYear.textContent=peso(v*SAVE_LO*12)+' to '+peso(v*SAVE_HI*12);
+  var t=frac, x=60+t*480, y=236-Math.sin(t*Math.PI)*138-t*30;
+  if(dialSun) dialSun.setAttribute('transform','translate('+x.toFixed(1)+','+y.toFixed(1)+')');
+  if(dialRays) dialRays.setAttribute('opacity',(t*0.95).toFixed(2));
+  if(dialGlow) dialGlow.setAttribute('fill','rgba(255,197,61,'+(t*0.07).toFixed(3)+')');
+}
+if(bill){ bill.addEventListener('input',updateCalc); updateCalc(); }
+
+/* ---------- the form ---------- */
+var form=document.getElementById('leadForm'), sent=document.getElementById('sent');
+if(form){
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
+    var body=[
+      'Name: '+g('fName'),
+      'Mobile: '+g('fPhone'),
+      'Email: '+g('fEmail'),
+      'City / Location: '+g('fCity'),
+      'Average monthly bill: '+g('fBill'),
+      'Property type: '+g('fType'),
+      '',
+      'Message:',
+      g('fMsg')||'(none)'
+    ].join('\n');
+    window.location.href='mailto:ecsolarsolutions01@gmail.com'
+      +'?subject='+encodeURIComponent('Solar assessment request: '+(g('fName')||'website'))
+      +'&body='+encodeURIComponent(body);
+    form.style.display='none';
+    sent.classList.add('show');
+    if(sent.focus) sent.focus();
+  });
+}
+
+/* ---------- reduced motion, live, both directions ---------- */
+var rmq=window.matchMedia('(prefers-reduced-motion: reduce)');
+function pinToFinalStates(){
+  disableScrub();
+  condPinned=true;
+  if(condLive) condLive.style.strokeDashoffset='0';
+  if(condPulse) condPulse.setAttribute('opacity','0');
+  jnodes.forEach(function(n){ n.classList.add('lit'); });
+  if(stage3d) stage3d.classList.remove('spinning');
+  [].forEach.call(document.querySelectorAll('.rise, .stag'), function(el){ el.classList.add('in','done'); });
+  document.documentElement.classList.add('pinned');
+}
+function unpinFinalStates(){
+  document.documentElement.classList.remove('pinned');
+  condPinned=false; condLast=-1; drawConductor();
+}
+if(rmq.addEventListener){
+  rmq.addEventListener('change',function(e){ if(e.matches) pinToFinalStates(); else applyHeroMode(); });
+}
+document.addEventListener('visibilitychange',function(){
+  document.body.classList.toggle('paused',document.hidden);
+  if(document.hidden) moteStop(); else if(heroOnScreen&&scrubOn) moteStart();
+});
+
+applyHeroMode();
+if(rmq.matches) pinToFinalStates();
+drawConductor();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+{
+  "designs": [
+    {
+      "filename": "designarena_image_zgi4ts29.jpg",
+      "type": "social_media_banner",
+      "platform": "Facebook",
+      "theme": {
+        "primary_colors": ["#0B4F43", "#F28C28", "#FFD700"],
+        "background": "Gradient from light peach/orange at the top to pale yellow in the middle, flanked by stylized green solar panels in perspective on the left and right."
+      },
+      "elements": [
+        {
+          "type": "header_text",
+          "position": "top_left",
+          "content": "EC Solar Sotign",
+          "icon": "small_sun_logo",
+          "color": "#0B4F43"
+        },
+        {
+          "type": "header_text",
+          "position": "top_right",
+          "content": "Facebook Banner Design",
+          "font_weight": "bold",
+          "color": "#000000"
+        },
+        {
+          "type": "central_graphic",
+          "position": "center_top",
+          "description": "Large stylized sun emblem. Features an 8-pointed star shape with a dark green outline, filled with a yellow-to-red gradient. The inner section is divided into three swirling segments containing a circuit board (PCB) pattern, surrounding a solid gradient central circle. Gold spark and dust particles float to the left and right.",
+          "text_annotation": "spark"
+        },
+        {
+          "type": "main_typography",
+          "position": "center",
+          "components": [
+            {
+              "element": "headline",
+              "text": "EC SOLAR SOLUTIONS",
+              "font_weight": "bold",
+              "color": "#0A192F"
+            },
+            {
+              "element": "subheadline",
+              "text": "Powering Tomorrow, Empathically",
+              "font_weight": "regular",
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "type": "speech_bubble",
+          "position": "bottom_left",
+          "text": "\"Power Your Home & Planet\"",
+          "background_color": "#FFFFFF",
+          "text_color": "#000000",
+          "pointer_direction": "right"
+        },
+        {
+          "type": "illustration",
+          "position": "bottom_center",
+          "description": "Black silhouette of a human arm and hand reaching upwards, holding a miniature, glowing version of the central sun emblem with radiating starburst lines."
+        },
+        {
+          "type": "button",
+          "position": "bottom_right",
+          "text": "Learn More",
+          "background_color": "#009688",
+          "text_color": "#FFFFFF",
+          "style": "rounded_pill_with_drop_shadow"
+        }
+      ]
+    },
+    {
+      "filename": "Banner.png",
+      "type": "horizontal_web_banner",
+      "theme": {
+        "primary_colors": ["#0B4F43", "#FF6B00", "#FFFFFF"],
+        "layout": "split_composition_diagonal"
+      },
+      "sections": [
+        {
+          "name": "Background",
+          "components": [
+            {
+              "type": "solid_fill",
+              "coverage": "left_half",
+              "color": "#FFFFFF"
+            },
+            {
+              "type": "photograph",
+              "coverage": "right_half",
+              "description": "Residential home roof completely covered in modern solar panels, bathed in bright, warm sunlight from a sunrise or sunset.",
+              "edge": "diagonal_cut_leaning_right"
+            }
+          ]
+        },
+        {
+          "name": "Brand and Headline",
+          "position": "left_side_overlay",
+          "components": [
+            {
+              "type": "logo_block",
+              "graphic": "Sun emblem with circuit board pattern (left)",
+              "title": "EC SOLAR",
+              "title_styling": "'EC' in solid dark green, 'SOLAR' in yellow-to-orange gradient",
+              "subtitle": "— SOLUTIONS —",
+              "subtitle_color": "#0B4F43"
+            },
+            {
+              "type": "callout_box",
+              "background_color": "#0B4F43",
+              "shape": "parallelogram_angled_right",
+              "content": [
+                {
+                  "text": "FULL BLAST ENERGY.",
+                  "color": "#FFFFFF",
+                  "font_weight": "bold",
+                  "style": "italic"
+                },
+                {
+                  "text": "PERMANENTLY LOWER BILLS.",
+                  "color": "#FFB300",
+                  "font_weight": "bold",
+                  "style": "italic"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Features Ribbon",
+          "position": "bottom_horizontal_band",
+          "background_color": "#FFFFFF",
+          "bottom_border_color": "#0B4F43",
+          "layout": "four_column_grid",
+          "items": [
+            {
+              "icon": "lightning_bolt_down_in_green_circle",
+              "title": "LOWER BILLS",
+              "description": "Save up to 90%\non electricity."
+            },
+            {
+              "icon": "house_with_leaf_in_green_circle",
+              "title": "CLEAN ENERGY",
+              "description": "Sustainable power\nfor a greener future."
+            },
+            {
+              "icon": "shield_with_check_in_green_circle",
+              "title": "RELIABLE POWER",
+              "description": "Stay on. Even when\nothers are off."
+            },
+            {
+              "icon": "crossed_wrenches_in_green_circle",
+              "title": "EXPERT ENGINEERING",
+              "description": "Built right. Built to\nlast."
+            }
+          ]
+        },
+        {
+          "name": "Call to Action and Footer",
+          "position": "bottom_right_overlay",
+          "components": [
+            {
+              "type": "cta_block",
+              "background": "Dark charcoal/green curved shape",
+              "headline": "POWER TODAY.",
+              "headline_color": "#FFFFFF",
+              "subheadline": "SAVE TOMORROW.",
+              "subheadline_color": "#FF6B00",
+              "button": "Orange circle with white right-pointing chevron arrow"
+            },
+            {
+              "type": "contact_info",
+              "position": "bottom_right_corner",
+              "background_color": "#0B4F43",
+              "items": [
+                {
+                  "icon": "facebook_logo",
+                  "text": "EC Solar Solutions"
+                },
+                {
+                  "icon": "globe_web_icon",
+                  "text": "www.ecsolarsolutions.com"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "filename": "Logo.png",
+      "type": "brand_logo",
+      "background_color": "#FFFFFF",
+      "elements": [
+        {
+          "type": "logomark",
+          "description": "A complex, stylized sun vector graphic. The outermost shape is an 8-pointed star with sharp, triangular rays. It has a thick, dark green (#0B4F43) stroke. The fill is a smooth linear gradient transitioning from bright yellow at the top to a deep red-orange at the bottom. Inside the star, the space is divided by green lines into three swirling segments that create a dynamic, shutter-like effect. Within these segments are thin white lines and circles mimicking a printed circuit board (PCB) routing pattern. In the very center is a solid circle with a subtle yellow-to-orange radial gradient, representing the core of the sun.",
+          "colors": {
+            "stroke": "#0B4F43",
+            "gradient_start": "#FFD700",
+            "gradient_end": "#FF4500",
+            "circuit_lines": "#FFFFFF"
+          }
+        },
+        {
+          "type": "logotype",
+          "layout": "stacked",
+          "components": [
+            {
+              "text": "EC SOLAR",
+              "font_family": "sans-serif",
+              "font_weight": "bold",
+              "styling": "The letters 'EC' are colored solid dark green (#0B4F43). The word 'SOLAR' uses a horizontal gradient transitioning from yellow on the 'S' to deep orange/red on the 'R'."
+            },
+            {
+              "text": "— SOLUTIONS —",
+              "font_family": "sans-serif",
+              "font_weight": "medium",
+              "letter_spacing": "widely_tracked",
+              "styling": "The word 'SOLUTIONS' is flanked by em-dashes. It features a subtle gradient that mirrors the primary color palette, shifting from dark green on the left to an orange/red tint on the right."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

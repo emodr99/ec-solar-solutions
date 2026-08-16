@@ -1,0 +1,27 @@
+# The 10k-websites skill is a third-party toolkit, not part of this site
+10k-websites/
+
+# Working files: raw frames, encode tests, watermark investigation
+review/
+
+# A manual snapshot taken before the video round. Git history replaces it,
+# but the folder is kept on disk in case it is still wanted.
+Version/
+
+# Superseded first drafts, kept locally only
+ec-solar-solutions-website.html
+ec-solar-solutions-website_1.html
+
+# Source footage masters are deliberately not committed. Git keeps every
+# version of a binary forever, so raw clips would bloat the repo permanently.
+# Only the processed, watermark-free encode in assets/ ships.
+# Keep these backed up somewhere else.
+*.mov
+3D Scrolling.mp4
+For the editing.mp4
+Websitie.mp4
+
+node_modules/
+*.log
+.DS_Store
+Thumbs.db

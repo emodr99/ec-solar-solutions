@@ -1,0 +1,233 @@
+{
+  "designs": [
+    {
+      "filename": "image_d9629b.jpg",
+      "type": "website_landing_page",
+      "theme": {
+        "primary_color": "#0F5257",
+        "secondary_color": "#F0F8F1",
+        "accent_color": "#E5A022",
+        "font_family": "sans-serif"
+      },
+      "sections": [
+        {
+          "name": "Header",
+          "layout": "horizontal_flex",
+          "components": [
+            { "type": "logo", "text": "SUNPOWER SOLAR", "icon": "sun_waves" },
+            { "type": "navigation", "links": ["Home", "Residential", "Commercial", "Why Solar?", "Our Process", "About", "Blog"] },
+            { "type": "button", "text": "GET A FREE QUOTE", "style": "solid_teal" }
+          ]
+        },
+        {
+          "name": "Hero",
+          "layout": "background_image_with_overlay",
+          "background": "Modern house with solar panels, trees, mountains, sunny sky",
+          "components": [
+            { "type": "headline", "text": "POWER YOUR HOME WITH CLEAN, RENEWABLE ENERGY." },
+            { "type": "subheadline", "text": "Switch to solar today and save thousands on electricity bills. Get your custom quote." },
+            { "type": "button", "text": "REQUEST FREE CONSULTATION", "style": "solid_teal" },
+            { "type": "testimonial_badge", "text": "\"We saved $240 last month!\" - Sarah R. California", "image": "female_avatar" }
+          ]
+        },
+        {
+          "name": "Why Go Solar?",
+          "layout": "three_column_grid",
+          "background_color": "#F4FDF4",
+          "components": [
+            { "type": "feature", "icon": "money_bag", "title": "Significant Savings", "description": "Save money on energy bills..." },
+            { "type": "feature", "icon": "plant", "title": "Eco-Friendly", "description": "Environmentally safe energy..." },
+            { "type": "feature", "icon": "power_tower", "title": "Energy Independence", "description": "Power grid independence..." }
+          ]
+        },
+        {
+          "name": "Our Services",
+          "layout": "two_column_cards",
+          "components": [
+            { "type": "toggle", "options": ["RESIDENTIAL", "COMMERCIAL"], "active": "RESIDENTIAL" },
+            { "type": "card", "image": "residential_roof", "title": "Residential Solar Systems", "bullets": ["Residential Solar Systems", "High-efficiency residential panels", "Energy monitor energy solutions"], "button": "LEARN MORE" },
+            { "type": "card", "image": "commercial_roof", "title": "Commercial Solar Solutions", "bullets": ["Commercial Solar Solutions", "High-quality installation", "Commercial commercial solutions"], "button": "LEARN MORE" }
+          ]
+        },
+        {
+          "name": "How It Works",
+          "layout": "horizontal_stepper",
+          "components": [
+            { "step": 1, "icon": "consult", "title": "Consult", "description": "Consult your options..." },
+            { "step": 2, "icon": "design", "title": "Design", "description": "Design your system..." },
+            { "step": 3, "icon": "install", "title": "Install", "description": "Install your panels..." },
+            { "step": 4, "icon": "monitor", "title": "Monitor", "description": "Monitor your generation..." }
+          ]
+        },
+        {
+          "name": "Customer Testimonials",
+          "layout": "carousel",
+          "background_color": "#E6F7FF",
+          "components": [
+            { "type": "card", "avatar": "male_1", "name": "Varley Saleors", "location": "Location, CA", "rating": 5, "quote": "Best decision we ever made!" },
+            { "type": "card", "avatar": "female_1", "name": "Alisha Sanan", "location": "Location, CA", "rating": 5, "quote": "Best decision we ever made!" },
+            { "type": "card", "avatar": "male_2", "name": "Roman Grenson", "location": "Location, CA", "rating": 5, "quote": "Best decision we ever made!" }
+          ],
+          "trust_badges": ["NABCEP", "BBB", "Green Seal", "Energy Star"]
+        },
+        {
+          "name": "Lead Generation",
+          "layout": "centered_form",
+          "background": "gradient_yellow_to_blue",
+          "components": [
+            { "type": "headline", "text": "READY TO SWITCH TO SOLAR?" },
+            { "type": "form", "fields": ["Name", "Email", "Phone", "Address", "Message"], "submit_button": "GET YOUR QUOTE" }
+          ]
+        },
+        {
+          "name": "Footer",
+          "layout": "four_column",
+          "components": [
+            { "type": "brand", "logo": "SUNPOWER SOLAR" },
+            { "type": "links", "items": ["Home", "Residential", "Commercial", "Why Solar?", "Our Process"] },
+            { "type": "contact", "address": "Address, Route 558", "phone": "(800) 555-0100", "email": "Email" },
+            { "type": "social", "icons": ["facebook", "instagram", "linkedin"] }
+          ],
+          "copyright": "© 2024 SunPower Solar. All Rights Reserved."
+        }
+      ]
+    },
+    {
+      "filename": "image_d95f79.jpg",
+      "type": "website_landing_page",
+      "theme": {
+        "primary_color": "#2C3E50",
+        "background_color": "#F8F9FA",
+        "font_family": "serif_and_sans_serif"
+      },
+      "sections": [
+        {
+          "name": "Hero Section",
+          "layout": "full_screen_background",
+          "background_image": "Close-up of solar panels on a roof with sun glare",
+          "components": [
+            {
+              "type": "header_nav",
+              "logo": "SolarNest",
+              "links": ["Home", "About Us", "Solar Solutions", "How It Works"],
+              "search_bar": true
+            },
+            { "type": "headline", "text": "POWER YOUR HOME WITH CLEAN, RELIABLE SOLAR ENERGY", "style": "serif_white" },
+            { "type": "subheadline", "text": "Switch to clean, reliable solar energy and enjoy lower bills, uninterrupted power, and long-term savings." },
+            { "type": "button", "text": "Get Started", "icon": "arrow_right", "style": "white_pill" }
+          ]
+        },
+        {
+          "name": "Benefits Section",
+          "layout": "three_column_grid",
+          "components": [
+            { "type": "title", "text": "Why More Homes Are Switching to Solar" },
+            { "type": "subtitle", "text": "Rising electricity costs and unreliable power are pushing more people toward a better, long-term energy solution." },
+            { "type": "card", "image": "panels_sun", "caption": "Lower monthly electricity bills" },
+            { "type": "card", "image": "city_solar", "caption": "Learn More ->" },
+            { "type": "card", "image": "house_solar", "caption": "Renewable energy source" }
+          ]
+        },
+        {
+          "name": "About Us",
+          "layout": "text_center_with_image_grid",
+          "components": [
+            { "type": "title", "text": "About Us" },
+            { "type": "description", "text": "We're on a mission to make clean, reliable energy accessible to every home and business..." },
+            { "type": "media_block", "image_left": "solar_installation_worker", "text_right": "At SolarNest, we believe energy should be simple, reliable..." }
+          ]
+        },
+        {
+          "name": "Hot Products",
+          "layout": "four_column_grid",
+          "components": [
+            { "type": "title", "text": "Hot Products" },
+            { "type": "product_images", "count": 4, "descriptions": ["Solar Panel Grid", "Inverter Battery", "Storage System", "Mounted Panels"] }
+          ]
+        },
+        {
+          "name": "How It Works",
+          "layout": "two_by_two_grid",
+          "components": [
+            { "type": "title", "text": "How It Works" },
+            { "type": "steps", "items": ["Consultation", "Design & Engineering", "Installation", "Maintenance"] }
+          ]
+        },
+        {
+          "name": "Portfolio & CTA",
+          "layout": "vertical_stack",
+          "components": [
+            { "type": "title", "text": "Solar Installations That Speak for Themselves" },
+            { "type": "image", "subject": "Large residential grid-tied system" },
+            { "type": "testimonial", "avatar": "user_avatar", "name": "Conan, Do-ja", "rating": 5 },
+            { "type": "cta_section", "title": "Ready to Switch to Smarter Energy?", "button": "Get Started" },
+            { "type": "footer_links", "columns": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "filename": "image_d95bb3.jpg",
+      "type": "infographic",
+      "theme": {
+        "primary_color": "#125B29",
+        "accent_color": "#4ADE80",
+        "style": "3D_isometric_illustration"
+      },
+      "sections": [
+        {
+          "name": "Header",
+          "layout": "top_banner",
+          "components": [
+            { "type": "headline", "text": "HOW SMART FACTORIES USE DATA TO IMPROVE SUSTAINABILITY", "formatting": ["SMART FACTORIES", "SUSTAINABILITY", "green_text"] },
+            { "type": "subheadline", "text": "Data. Automation. Intelligence. A Greener Future." },
+            { "type": "logo", "text": "EMISSIONS AND STACK", "position": "top_right" }
+          ]
+        },
+        {
+          "name": "Main Illustration",
+          "layout": "center_canvas",
+          "description": "3D rendering of an eco-friendly industrial plant with solar panels on the roof, wind turbines in the background, delivery truck, and glowing green data lines connecting elements.",
+          "callouts": [
+            { "position": "left", "icon": "leaf", "title": "RENEWABLE ENERGY", "text": "Clean power for smarter operations" },
+            { "position": "top_center", "icon": "sensor", "title": "CONNECTED SENSORS", "text": "Real-time data from machines & environment" },
+            { "position": "top_right", "icon": "cloud", "title": "CLOUD & AI ANALYTICS", "text": "Turn data into insights and smart decisions" },
+            { "position": "bottom_left", "icon": "bar_chart", "title": "ENERGY OPTIMIZATION", "text": "Use data to reduce waste and save more" },
+            { "position": "bottom_right", "icon": "leaf_slash", "title": "LOWER EMISSIONS", "text": "Monitor, reduce & stay compliant" }
+          ]
+        },
+        {
+          "name": "Dashboard Overlay",
+          "layout": "floating_panel_bottom_center",
+          "components": [
+            { "type": "panel_title", "text": "EMISSIONS MONITORING" },
+            { "type": "metric", "label": "CO2", "value": "412 ppm", "chart": "gauge" },
+            { "type": "metric", "label": "ENERGY USAGE", "value": "-18%", "subtext": "vs last month", "chart": "line_graph" },
+            { "type": "metric", "label": "WASTE REDUCTION", "value": "-23%", "subtext": "vs last month", "chart": "line_graph" }
+          ]
+        },
+        {
+          "name": "Bottom Feature Row",
+          "layout": "five_column_icons",
+          "background_color": "#0F4C23",
+          "text_color": "#FFFFFF",
+          "components": [
+            { "icon": "crosshair", "title": "REAL-TIME MONITORING", "text": "Know more. Act faster." },
+            { "icon": "gear", "title": "SMART AUTOMATION", "text": "Optimize processes. Reduce waste." },
+            { "icon": "chart_up", "title": "DATA-DRIVEN INSIGHTS", "text": "Smarter decisions. Better outcomes." },
+            { "icon": "shield_check", "title": "COMPLIANCE MADE EASY", "text": "Stay ahead of regulations." },
+            { "icon": "globe", "title": "SUSTAINABILITY AT SCALE", "text": "Build a responsible tomorrow." }
+          ]
+        },
+        {
+          "name": "Footer",
+          "layout": "split_horizontal",
+          "components": [
+            { "type": "tagline", "text": "Smart factories don't just build products. They build a sustainable future." },
+            { "type": "website", "url": "www.emissionsandstack.com", "subtext": "Monitoring Today. Sustaining Tomorrow." }
+          ]
+        }
+      ]
+    }
+  ]
+}
