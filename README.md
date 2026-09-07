@@ -60,3 +60,5 @@ Then open <http://localhost:8123> in a browser. Chrome shows scroll roughness fi
 
 Phone: +63 994 025 7286
 Email: ecsolarsolutions01@gmail.com
+
+Last content update: About section added September 2026.
