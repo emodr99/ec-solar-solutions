@@ -580,6 +580,28 @@ main{position:relative;z-index:2}
 .posline{margin-top:28px;font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,2.2vw,1.65rem);line-height:1.24;max-width:24ch}
 .posline b{color:var(--accent-deep)}
 
+/* --- about --- */
+.about{background:linear-gradient(180deg,transparent,rgba(11,79,67,.07),transparent)}
+.aboutgrid{display:grid;grid-template-columns:1fr 366px;gap:24px 56px;margin-top:48px;align-items:start}
+@media(max-width:940px){.aboutgrid{grid-template-columns:1fr;gap:36px}}
+.abody{display:grid;gap:18px;max-width:58ch;color:var(--text-secondary)}
+.abody em{color:var(--text-primary);font-style:normal;font-weight:600}
+.stands{margin:38px 0 0;padding:0;list-style:none;display:grid;gap:17px}
+.stands li{display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:baseline}
+.stands li::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--accent);transform:translateY(2px)}
+.stands b{display:block;font-weight:600;margin-bottom:3px;color:var(--text-primary)}
+.stands span{color:var(--text-secondary);font-size:.95rem}
+.factcard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 28px;box-shadow:0 2px 10px rgba(35,46,34,.05);position:sticky;top:112px}
+@media(max-width:940px){.factcard{position:static}}
+.factcard h3{font-size:1.18rem;margin-bottom:20px}
+.factcard dl{margin:0;display:grid;gap:16px}
+.factcard dt{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-secondary)}
+.factcard dd{margin:5px 0 0;font-size:.95rem}
+.factcard dd a{color:var(--accent-deep);text-decoration:none;font-weight:500}
+.factcard dd a:hover{text-decoration:underline}
+.fcnote{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);font-size:.88rem;color:var(--text-secondary)}
+@media(pointer:coarse){.factcard dd a{display:inline-flex;align-items:center;min-height:44px}}
+
 /* --- calculator --- */
 .calcbox{margin-top:48px;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel);box-shadow:0 12px 40px rgba(40,18,2,.08)}
 .calcgrid{display:grid;grid-template-columns:1.05fr .95fr}
@@ -740,6 +762,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <a href="#howitworks">How It Works</a>
     <a href="#residential">Residential</a>
     <a href="#calculator">Calculator</a>
+    <a href="#about">About</a>
     <a href="#faq">FAQ</a>
   </div>
   <a class="btn btn-primary" href="#assessment">Get My Free Assessment</a>
@@ -1274,6 +1297,56 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
   </section>
 
+  <!-- ---------- ABOUT ---------- -->
+  <!--
+    FILL IN WHEN YOU HAVE THEM. These are the only facts a visitor asks for
+    that this section cannot answer yet, and none of them should be guessed:
+      - the year EC Solar Solutions started
+      - how many homes you have installed for so far
+      - PCAB licence, DTI or SEC registration number, DOE accreditation
+      - names and roles of the people who show up for the site visit
+    Each one belongs in the "At a glance" list below as another dt/dd pair.
+  -->
+  <section class="sec about" id="about">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">Who we are</p>
+        <h2>Who you would be working with.</h2>
+        <p class="lede">EC Solar Solutions is a solar energy company based in Cubao, Quezon City. We design and install residential solar systems for families across Metro Manila and the nearby provinces, and we stay reachable long after the panels are up.</p>
+      </div>
+
+      <div class="aboutgrid">
+        <div class="rise">
+          <div class="abody">
+            <p>Most families who call us are not shopping for panels. They are trying to work out whether solar is worth it for their own house, and nearly everyone they can ask has something to sell them.</p>
+            <p>So we start at the other end. Before we recommend anything we look at your real bill, your real roof, and how your household actually uses power through the day. Sometimes that leads to a system. Sometimes it leads us to say the numbers do not work for you yet, and that answer costs you nothing either.</p>
+            <p><em>We do not sell solar panels. We help Filipino families take back control of their electricity.</em></p>
+          </div>
+          <ul class="stands">
+            <li><span><b>The assessment is free, and so is a no</b>If solar does not make sense for your home yet, we will say so, and we will tell you what would have to change for it to make sense later.</span></li>
+            <li><span><b>Sized to your house, not to a package</b>We do not keep a set of tiers and fit you into one. The design follows your usage, your roof and your budget.</span></li>
+            <li><span><b>Straight answers about brownouts and batteries</b>A grid connected system switches off when the grid goes down. Only a hybrid or off grid system with a battery keeps your home running, and not every home needs one. You hear that from us before you decide, not after.</span></li>
+            <li><span><b>We are still here after installation</b>Warranty support and after sales support are part of the work, not an add on.</span></li>
+          </ul>
+        </div>
+
+        <aside class="rise">
+          <div class="factcard">
+            <h3>At a glance</h3>
+            <dl>
+              <div><dt>Based in</dt><dd>Cubao, Quezon City, Philippines</dd></div>
+              <div><dt>Where we work</dt><dd>Metro Manila and the nearby provinces, including Rizal, Cavite and Batangas</dd></div>
+              <div><dt>What we install</dt><dd>Residential grid connected, hybrid and off grid solar systems</dd></div>
+              <div><dt>What comes with it</dt><dd>Free site assessment, professional installation, warranty support, flexible financing and after sales support</dd></div>
+              <div><dt>Talk to a person</dt><dd><a href="tel:+639940257286">+63 994 025 7286</a><br><a href="mailto:ecsolarsolutions01@gmail.com">ecsolarsolutions01@gmail.com</a></dd></div>
+            </dl>
+            <p class="fcnote">Only exploring, and not ready to decide anything? Call the number above anyway. We answer questions from people who are still working it out.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <!-- ---------- OFFER + FORM ---------- -->
   <section class="sec offer" id="assessment">
     <div class="wrap">
@@ -1375,6 +1448,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <li><a href="#howitworks">How solar works</a></li>
         <li><a href="#residential">Residential solar</a></li>
         <li><a href="#calculator">Solar potential calculator</a></li>
+        <li><a href="#about">About EC Solar Solutions</a></li>
         <li><a href="#faq">Frequently asked questions</a></li>
         <li><a href="#assessment">Free assessment</a></li>
       </ul>
