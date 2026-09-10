@@ -1,6 +1,6 @@
-# EC Solar Solutions
+# EC Solar Energy Solutions
 
-The website for EC Solar Solutions, a solar energy company serving Filipino homeowners.
+The website for EC Solar Energy Solutions, a solar energy company serving Filipino homeowners.
 
 **Full Blast Energy, Zero Worries on Electric Bill**
 
@@ -60,8 +60,13 @@ Then open <http://localhost:8123> in a browser. Chrome shows scroll roughness fi
   Constants sit at the top of the calculator script: `RATE` ₱12.14/kWh, `PSH` 4.5, `EFF` 0.80,
   `PANEL_W` 550, `DOD` 0.80, `EXPORT_RATE` ₱6.50 **(needs confirming)**, `MAX_CUT` 0.90.
   The three goal buttons map to Options A, B and C in the spec (target offsets 0.85 / 1.00 / 1.15).
-  **`MAX_CUT` exists on purpose:** part of a Meralco bill is fixed charges, and the spec forbids
+  **`MAX_CUT` exists on purpose:** part of a electricity bill is fixed charges, and the spec forbids
   promising a zero bill, so the displayed saving is held below the full amount.
+- **The Recent installations section is evidence, not marketing.** Every row comes from a real
+  post by Engr Emil Caina, logged in `docs/emil_caina_solar_posts.csv`. Dates are approximate
+  because Facebook shows relative ages. **Do not add a row that is not backed by a real post.**
+  The two photos there are frames from the drone footage of one installation, so no town is
+  claimed for them.
 - **The brownout answer in the FAQ is deliberately blunt.** A normal grid-tied system shuts off during a brownout for safety, and only a hybrid or off-grid system with a battery keeps a home running. Please keep that accurate.
 - The lead form opens the visitor's email app addressed to the business. There is no backend.
 

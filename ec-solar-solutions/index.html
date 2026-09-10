@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EC Solar Solutions | Full Blast Energy, Zero Worries on Electric Bill</title>
-<meta name="description" content="EC Solar Solutions helps Filipino families take back control of their electricity costs with a solar system designed around how your home actually uses power. Free site assessment.">
+<title>EC Solar Energy Solutions | Full Blast Energy, Zero Worries on Electric Bill</title>
+<meta name="description" content="EC Solar Energy Solutions helps Filipino families take back control of their electricity costs with a solar system designed around how your home actually uses power. Free site assessment.">
 <meta name="theme-color" content="#FAF2E4">
 <meta name="color-scheme" content="light">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="EC Solar Solutions | Full Blast Energy, Zero Worries on Electric Bill">
+<meta property="og:title" content="EC Solar Energy Solutions | Full Blast Energy, Zero Worries on Electric Bill">
 <meta property="og:description" content="We help Filipino homeowners understand and manage their electricity costs with thoughtfully designed solar systems.">
 <meta property="og:url" content="https://ec-solar-solutions.vercel.app/">
 <!-- the wide reveal frame, not the logo: a square logo crops badly in link cards -->
 <meta property="og:image" content="https://ec-solar-solutions.vercel.app/assets/hero-end.jpg">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1152">
-<meta property="og:image:alt" content="A rooftop solar array installed by EC Solar Solutions, with fields and water beyond at golden hour">
-<meta property="og:site_name" content="EC Solar Solutions">
+<meta property="og:image:alt" content="A rooftop solar array installed by EC Solar Energy Solutions, with fields and water beyond at golden hour">
+<meta property="og:site_name" content="EC Solar Energy Solutions">
 <meta property="og:locale" content="en_PH">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -550,6 +550,34 @@ main{position:relative;z-index:2}
 .rev.lead q{font-size:clamp(1.3rem,2.6vw,1.9rem);max-width:22ch}
 @media(max-width:900px){.rev.lead{grid-column:span 1}}
 
+/* --- recent installations --- */
+.work{background:linear-gradient(180deg,transparent,rgba(242,140,40,.07),transparent)}
+.workstats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:760px){.workstats{grid-template-columns:1fr}}
+.workstats div{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 22px;box-shadow:0 2px 10px rgba(35,46,34,.05)}
+.workstats b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--accent-deep);line-height:1.05}
+.workstats span{display:block;margin-top:8px;font-size:.9rem;color:var(--text-secondary)}
+.workgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;margin-top:44px;align-items:start}
+@media(max-width:940px){.workgrid{grid-template-columns:1fr;gap:34px}}
+.joblog{list-style:none;margin:0;padding:0;display:grid}
+.joblog li{display:grid;grid-template-columns:92px 1fr;gap:18px;padding:18px 0;align-items:baseline;border-top:1px solid var(--line)}
+.joblog li:first-child{border-top:0;padding-top:0}
+@media(max-width:520px){.joblog li{grid-template-columns:1fr;gap:6px}}
+.jdate{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);white-space:nowrap}
+.jwhat b{display:block;font-weight:600;margin-bottom:3px}
+.jwhat{color:var(--text-secondary);font-size:.95rem}
+.jline{grid-column:2;font-size:.88rem;color:var(--text-secondary);opacity:.85;font-style:italic}
+@media(max-width:520px){.jline{grid-column:1}}
+.workshots{display:grid;gap:18px;position:sticky;top:112px}
+@media(max-width:940px){.workshots{position:static;grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.workshots{grid-template-columns:1fr}}
+.workshots figure{margin:0;border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(35,46,34,.16)}
+.workshots img{width:100%;height:auto;display:block}
+.workshots figcaption{background:var(--panel);border:1px solid var(--line);border-top:0;padding:13px 16px;font-size:.85rem;color:var(--text-secondary);line-height:1.5}
+.worknote{margin-top:40px;font-size:.9rem;color:var(--text-secondary);border-left:3px solid var(--accent);padding-left:16px;max-width:70ch}
+.worknote a{color:var(--accent-deep);font-weight:500}
+@media(pointer:coarse){.worknote a{display:inline-flex;align-items:center;min-height:44px}}
+
 /* --- residential --- */
 .resi{display:grid;grid-template-columns:1fr 1fr;gap:20px 56px;margin-top:48px;align-items:start}
 @media(max-width:860px){.resi{grid-template-columns:1fr}}
@@ -793,14 +821,15 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <!-- ============================ NAV ============================ -->
 <nav class="nav" id="nav">
   <a class="brand" href="#top">
-    <span class="brandmark"><img src="assets/mark.png" width="480" height="476" alt="EC Solar Solutions" fetchpriority="high" decoding="async"></span>
+    <span class="brandmark"><img src="assets/mark.png" width="480" height="476" alt="EC Solar Energy Solutions" fetchpriority="high" decoding="async"></span>
     <span class="wordmark">
-      <b>EC Solar Solutions</b>
+      <b>EC Solar Energy Solutions</b>
       <i>Full Blast Energy, Zero Worries on Electric Bill</i>
     </span>
   </a>
   <div class="navlinks">
     <a href="#howitworks">How It Works</a>
+    <a href="#work">Our Work</a>
     <a href="#residential">Residential</a>
     <a href="#calculator">Calculator</a>
     <a href="#about">About</a>
@@ -812,7 +841,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <span id="top"></span>
 
 <!-- ============================ HERO ============================ -->
-<section class="hero" id="hero" aria-label="EC Solar Solutions introduction">
+<section class="hero" id="hero" aria-label="EC Solar Energy Solutions introduction">
   <div class="stage" id="stage">
 
     <!-- the hero footage: a real EC Solar installation, scrubbed by scroll -->
@@ -851,7 +880,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <div class="band" id="band4" data-a="0.76" data-b="1.0">
         <div class="bandtext">
           <h2 class="e-rise" data-split="word" data-spread="0.5">Full blast energy. Zero worries on your electric bill.</h2>
-          <p class="sub e-rise-sub">EC Solar Solutions helps Filipino families take back control of their electricity costs, with a system designed around how your home actually uses power.</p>
+          <p class="sub e-rise-sub">EC Solar Energy Solutions helps Filipino families take back control of their electricity costs, with a system designed around how your home actually uses power.</p>
           <div class="row e-rise-cta">
             <a class="btn btn-primary" href="#calculator">See What Solar Could Do For My Home</a>
             <a class="btn btn-ghost" href="#howitworks">See How It Works</a>
@@ -865,7 +894,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 </section>
 
 <!-- ============ STATIC HERO (phones, reduced motion) ============ -->
-<section class="statichero" id="statichero" aria-label="EC Solar Solutions introduction">
+<section class="statichero" id="statichero" aria-label="EC Solar Energy Solutions introduction">
   <div class="scene sposter" aria-hidden="true"></div>
   <div class="fade" aria-hidden="true"></div>
   <div class="scrim" aria-hidden="true"></div>
@@ -874,7 +903,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <div class="inner">
     <p class="kicker">For families tired of worrying about every electric bill</p>
     <h1>Full blast energy. Zero worries on your electric bill.</h1>
-    <p class="sub">Imagine opening your next bill with relief instead of dread. EC Solar Solutions helps Filipino families take back control of their electricity costs.</p>
+    <p class="sub">Imagine opening your next bill with relief instead of dread. EC Solar Energy Solutions helps Filipino families take back control of their electricity costs.</p>
     <div class="row">
       <a class="btn btn-primary" href="#calculator">See What Solar Could Do For My Home</a>
       <a class="btn btn-ghost" href="#howitworks">See How It Works</a>
@@ -934,7 +963,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section class="sec empathy" id="why-us">
     <div class="wrap empathygrid">
       <div class="ehead rise">
-        <h2>Why EC Solar Solutions?</h2>
+        <h2>Why EC Solar Energy Solutions?</h2>
       </div>
       <div class="body rise">
         <p>You know the feeling. The bill arrives, and you already know it went up.</p>
@@ -1132,6 +1161,92 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
   </section>
 
+
+  <!-- ---------- RECENT INSTALLATIONS ---------- -->
+  <!--
+    Every row below comes from Engr Emil Caina's own Facebook posts, logged in
+    docs/emil_caina_solar_posts.csv. Dates are approximate because Facebook
+    shows relative ages (4d, 3w, 26w) rather than exact dates.
+    DO NOT add a row here that is not backed by a real post.
+    The two photos are frames from the drone footage of one installation. The
+    town for that footage is not confirmed, so no location is claimed for them.
+  -->
+  <section class="sec work" id="work">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="kicker">Recent installations</p>
+        <h2>Roofs we have actually worked on.</h2>
+        <p class="lede">This is a record of jobs posted from site over the past year by Engr Emil Caina, who runs the installs. Sizes from 6 kW up to a 12 kW build, across Laguna, Quezon City and Pampanga.</p>
+      </div>
+
+      <div class="workstats stag">
+        <div><b>12</b><span>jobs posted in the last year</span></div>
+        <div><b>6 to 12 kW</b><span>system sizes installed</span></div>
+        <div><b>Deye &amp; Solis</b><span>inverter brands used on site</span></div>
+      </div>
+
+      <div class="workgrid">
+        <ol class="joblog rise">
+          <li>
+            <span class="jdate">Sep 2026</span>
+            <span class="jwhat"><b>8 kW residential system</b>Near the Mamplasan exit, Bi&ntilde;an, Laguna</span>
+            <span class="jline">Installed through the rain.</span>
+          </li>
+          <li>
+            <span class="jdate">Aug 2026</span>
+            <span class="jwhat"><b>Rooftop installation</b>Tandang Sora, Quezon City</span>
+          </li>
+          <li>
+            <span class="jdate">Aug 2026</span>
+            <span class="jwhat"><b>Out-of-town installation</b>Mexico, Pampanga</span>
+          </li>
+          <li>
+            <span class="jdate">Aug 2026</span>
+            <span class="jwhat"><b>6 kW system</b>Another repeat build</span>
+          </li>
+          <li>
+            <span class="jdate">Aug 2026</span>
+            <span class="jwhat"><b>Joint installation</b>Run with a partner crew, sharing the work</span>
+          </li>
+          <li>
+            <span class="jdate">Jul 2026</span>
+            <span class="jwhat"><b>12 kW system</b>Subcontract build alongside another team</span>
+          </li>
+          <li>
+            <span class="jdate">Jul 2026</span>
+            <span class="jwhat"><b>8 kW system, Solis inverter</b></span>
+          </li>
+          <li>
+            <span class="jdate">Jul 2026</span>
+            <span class="jwhat"><b>Upgrade for a returning client</b>Mexico, Pampanga</span>
+            <span class="jline">Same household, second job.</span>
+          </li>
+          <li>
+            <span class="jdate">Mar 2026</span>
+            <span class="jwhat"><b>Bill down from about &#8369;6,000 a month</b>A client&rsquo;s own before and after</span>
+          </li>
+        </ol>
+
+        <div class="workshots rise">
+          <figure>
+            <img src="assets/work-array.jpg" width="1500" height="843" alt="A rooftop solar array installed by EC Solar Energy Solutions, seen from above" loading="lazy" decoding="async">
+            <figcaption>The array on a finished install, seen from the drone.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/work-site.jpg" width="1500" height="843" alt="The same installation seen wider, with the surrounding fields and water" loading="lazy" decoding="async">
+            <figcaption>The same roof, pulled back. Provincial site, standard metal roof.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <p class="worknote">
+        These are taken from Engr Emil Caina&rsquo;s own posts from site, so the dates are approximate to within a few days.
+        More of the work, with the photos and the comments underneath, is on
+        <a href="https://www.facebook.com/emilcaina" target="_blank" rel="noopener noreferrer">his Facebook page</a>.
+      </p>
+    </div>
+  </section>
+
   <!-- ---------- RESIDENTIAL ---------- -->
   <section class="sec" id="residential">
     <div class="wrap">
@@ -1151,7 +1266,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         </div>
         <div class="rise">
           <figure class="workshot">
-            <img src="assets/reveal.jpg" width="1920" height="1080" alt="A rooftop solar array installed by EC Solar Solutions, seen from above with fields and water beyond" loading="lazy" decoding="async">
+            <img src="assets/reveal.jpg" width="1920" height="1080" alt="A rooftop solar array installed by EC Solar Energy Solutions, seen from above with fields and water beyond" loading="lazy" decoding="async">
             <figcaption>An EC Solar installation, and the view from the roof it sits on.</figcaption>
           </figure>
           <div class="resipanel">
@@ -1181,7 +1296,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <p class="posline">Your family is building the future. <b>We are here to help you power it.</b></p>
       </div>
       <figure class="plate rise">
-        <img src="assets/logo.png" width="1254" height="1254" alt="The EC Solar Solutions logo" loading="lazy" decoding="async">
+        <img src="assets/logo.png" width="1254" height="1254" alt="The EC Solar Energy Solutions logo" loading="lazy" decoding="async">
         <figcaption>Full Blast Energy,<br>Zero Worries on Electric Bill</figcaption>
       </figure>
     </div>
@@ -1193,7 +1308,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <div class="sec-head rise">
         <p class="kicker">Solar energy potential</p>
         <h2>Know your energy. Calculate your solar.</h2>
-        <p class="lede">Tell us your Meralco bill and what you want solar to do for you. The roof fills with the panels you would need, and every figure below comes from that same system. This is a preliminary estimate, not a final engineering design.</p>
+        <p class="lede">Tell us your electricity bill and what you want solar to do for you. The roof fills with the panels you would need, and every figure below comes from that same system. This is a preliminary estimate, not a final engineering design.</p>
       </div>
 
       <div class="calcbox rise">
@@ -1287,9 +1402,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
               </svg>
             </div>
 
-            <div class="billrow"><span class="lbl">Your average monthly Meralco bill</span></div>
+            <div class="billrow"><span class="lbl">Your average monthly electricity bill</span></div>
             <div class="billval" id="billOut">&#8369;10,000</div>
-            <label for="bill" class="sr">Average monthly Meralco bill in pesos</label>
+            <label for="bill" class="sr">Average monthly electricity bill in pesos</label>
             <input type="range" id="bill" min="1000" max="30000" step="500" value="10000" aria-describedby="billOut">
             <p class="hint">From &#8369;1,000 to &#8369;30,000 a month. You can also use the arrow keys.</p>
 
@@ -1299,7 +1414,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
                 <input type="text" id="kwhIn" inputmode="numeric" placeholder="e.g. 824" aria-describedby="kwhNote">
                 <span class="unit">kWh / month</span>
               </div>
-              <p class="hint" id="kwhNote">It is printed on your Meralco bill. Leave this empty to estimate it from the peso amount.</p>
+              <p class="hint" id="kwhNote">It is printed on your electricity bill. Leave this empty to estimate it from the peso amount.</p>
             </div>
           </div>
 
@@ -1354,8 +1469,8 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
               Capacity = daily consumption &#215; the target offset for your goal &#247; (4.5 &#215; 0.80), rounded up to whole 550 W panels.
               Battery = backup energy needed &#247; 80% usable depth of discharge.
               <b>Generation is not the same as bill reduction.</b> Power used the moment it is made replaces electricity at the full rate. Power exported to the grid is credited lower under net metering, so the two are counted separately.
-              Part of every Meralco bill is fixed charges that no system removes, so the saving is capped short of the full amount and we never promise a zero bill.
-              <b>This is a preliminary estimate, not a final design.</b> Real figures need your actual bill history, a site inspection, roof measurements, and a shading and load analysis. We do not promise a zero Meralco bill.
+              Part of every electricity bill is fixed charges that no system removes, so the saving is capped short of the full amount and we never promise a zero bill.
+              <b>This is a preliminary estimate, not a final design.</b> Real figures need your actual bill history, a site inspection, roof measurements, and a shading and load analysis. We do not promise a zero electricity bill.
             </p>
 
             <div class="calccta"><a class="btn btn-primary" href="#assessment">Get My Free Assessment</a></div>
@@ -1435,10 +1550,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <!--
     FILL IN WHEN YOU HAVE THEM. These are the only facts a visitor asks for
     that this section cannot answer yet, and none of them should be guessed:
-      - the year EC Solar Solutions started
-      - how many homes you have installed for so far
+      - the year EC Solar Energy Solutions started
+      - how many homes you have installed for so far (the work section lists 12 posted jobs in the last year, which is a floor, not the total)
       - PCAB licence, DTI or SEC registration number, DOE accreditation
-      - names and roles of the people who show up for the site visit
     Each one belongs in the "At a glance" list below as another dt/dd pair.
   -->
   <section class="sec about" id="about">
@@ -1446,12 +1560,13 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <div class="sec-head rise">
         <p class="kicker">Who we are</p>
         <h2>Who you would be working with.</h2>
-        <p class="lede">EC Solar Solutions is a solar energy company based in Cubao, Quezon City. We design and install residential solar systems for families across Metro Manila and the nearby provinces, and we stay reachable long after the panels are up.</p>
+        <p class="lede">EC Solar Energy Solutions is a solar energy company based in Cubao, Quezon City. We design and install residential solar systems for families across Metro Manila and the nearby provinces, and we stay reachable long after the panels are up.</p>
       </div>
 
       <div class="aboutgrid">
         <div class="rise">
           <div class="abody">
+            <p>The installs are run by <b>Engr Emil Caina</b>, who posts the jobs from site as they happen. If you book an assessment, he is the one who climbs onto your roof.</p>
             <p>Most families who call us are not shopping for panels. They are trying to work out whether solar is worth it for their own house, and nearly everyone they can ask has something to sell them.</p>
             <p>So we start at the other end. Before we recommend anything we look at your real bill, your real roof, and how your household actually uses power through the day. Sometimes that leads to a system. Sometimes it leads us to say the numbers do not work for you yet, and that answer costs you nothing either.</p>
             <p><em>We do not sell solar panels. We help Filipino families take back control of their electricity.</em></p>
@@ -1469,8 +1584,10 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
             <h3>At a glance</h3>
             <dl>
               <div><dt>Based in</dt><dd>Cubao, Quezon City, Philippines</dd></div>
-              <div><dt>Where we work</dt><dd>Metro Manila and the nearby provinces, including Rizal, Cavite and Batangas</dd></div>
+              <div><dt>Where we work</dt><dd>Metro Manila and the nearby provinces. Recent jobs on record: Bi&ntilde;an in Laguna, Tandang Sora in Quezon City, and Mexico in Pampanga</dd></div>
+              <div><dt>Who runs the installs</dt><dd>Engr Emil Caina. His posts from site are on <a href="https://www.facebook.com/emilcaina" target="_blank" rel="noopener noreferrer">Facebook</a></dd></div>
               <div><dt>What we install</dt><dd>Residential grid connected, hybrid and off grid solar systems</dd></div>
+              <div><dt>Equipment used</dt><dd>Deye and Solis inverters, among others, chosen per design</dd></div>
               <div><dt>What comes with it</dt><dd>Free site assessment, professional installation, warranty support, flexible financing and after sales support</dd></div>
               <div><dt>Talk to a person</dt><dd><a href="tel:+639940257286">+63 994 025 7286</a><br><a href="mailto:ecsolarsolutions01@gmail.com">ecsolarsolutions01@gmail.com</a></dd></div>
             </dl>
@@ -1562,8 +1679,8 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <div class="wrap fgrid">
     <div>
       <a class="fbrand" href="#top">
-        <span class="brandmark"><img src="assets/mark.png" width="480" height="476" alt="EC Solar Solutions" loading="lazy" decoding="async"></span>
-        <b style="font-family:var(--display);font-size:1.02rem;color:#fff">EC Solar Solutions</b>
+        <span class="brandmark"><img src="assets/mark.png" width="480" height="476" alt="EC Solar Energy Solutions" loading="lazy" decoding="async"></span>
+        <b style="font-family:var(--display);font-size:1.02rem;color:#fff">EC Solar Energy Solutions</b>
       </a>
       <p class="tag">Full Blast Energy, Zero Worries on Electric Bill</p>
       <p>We help Filipino homeowners understand and manage their electricity costs with solar systems designed around their real needs.</p>
@@ -1582,14 +1699,14 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <li><a href="#howitworks">How solar works</a></li>
         <li><a href="#residential">Residential solar</a></li>
         <li><a href="#calculator">Solar potential calculator</a></li>
-        <li><a href="#about">About EC Solar Solutions</a></li>
+        <li><a href="#about">About EC Solar Energy Solutions</a></li>
         <li><a href="#faq">Frequently asked questions</a></li>
         <li><a href="#assessment">Free assessment</a></li>
       </ul>
     </div>
   </div>
   <div class="wrap legal">
-    <span>&copy; 2026 EC Solar Solutions. All Rights Reserved.</span>
+    <span>&copy; 2026 EC Solar Energy Solutions. All Rights Reserved.</span>
     <span>Figures on this site are estimates for guidance. Exact numbers, warranty and financing are set out in your quotation.</span>
   </div>
 </footer>
@@ -1926,7 +2043,7 @@ if(stage3d){
 
    Generation is NOT the same as bill reduction, which is why the last line
    splits self-consumption from export instead of valuing every kWh at retail.  */
-var RATE=12.14;          // Meralco reference rate, pesos per kWh
+var RATE=12.14;          // electricity reference rate, pesos per kWh
 var PSH=4.5;             // peak sun hours per day
 var EFF=0.80;            // system efficiency
 var PANEL_W=550;         // watts per panel
@@ -1936,7 +2053,7 @@ var EXPORT_RATE=6.50;    // net metering export credit, pesos per kWh  << CONFIR
 var DAY_SHARE=0.55;      // share of consumption during daylight, no battery
 var BATT_SELF=0.90;      // effective self-consumption once a battery shifts the evening
 var MAX_CUT=0.90;        // never show more than this share of the bill removed: part of a
-                         // Meralco bill is fixed charges that solar cannot touch, and the
+                         // electricity bill is fixed charges that solar cannot touch, and the
                          // spec is explicit that a zero bill must not be promised
 var INV=[3,3.6,5,6,8,10,12,15,20,25,30,40,50];
 
