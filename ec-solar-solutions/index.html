@@ -550,6 +550,22 @@ main{position:relative;z-index:2}
 .rev.lead q{font-size:clamp(1.3rem,2.6vw,1.9rem);max-width:22ch}
 @media(max-width:900px){.rev.lead{grid-column:span 1}}
 
+/* --- job photo gallery --- */
+.jobgal{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px}
+@media(max-width:1000px){.jobgal{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.jobgal{grid-template-columns:1fr}}
+.job{margin:0;border-radius:18px;overflow:hidden;background:var(--panel);border:1px solid var(--line);
+  box-shadow:0 2px 10px rgba(35,46,34,.05);display:flex;flex-direction:column;
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease)}
+.job:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(35,46,34,.12)}
+.job.wide{grid-column:span 2}
+@media(max-width:600px){.job.wide{grid-column:span 1}}
+.job img{width:100%;height:100%;object-fit:cover;display:block;flex:1;min-height:190px;background:var(--canvas-lift)}
+.job figcaption{padding:15px 17px;font-size:.86rem;color:var(--text-secondary);line-height:1.5;border-top:1px solid var(--line)}
+.job figcaption b{display:block;color:var(--text-primary);font-weight:600;margin-bottom:3px;font-size:.92rem}
+.saidwrap{margin-top:56px;padding-top:44px;border-top:1px solid var(--line)}
+.saidhead{font-size:1.25rem;margin-bottom:26px}
+
 /* --- recent installations --- */
 .work{background:linear-gradient(180deg,transparent,rgba(242,140,40,.07),transparent)}
 .workstats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
@@ -1130,33 +1146,68 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   </div>
 
   <!-- ---------- REVIEWS ---------- -->
+  <!--
+    The photos are real job photos from Engr Emil Caina's own posts, matched to
+    the post they came from, so each caption names the place that post named.
+    DO NOT move a photo to a different job. If a job has no photo, it gets no photo.
+    Deliberately NOT published: the customer electricity bills from the savings
+    post. They show the account holder's name, address and account number.
+  -->
   <section class="sec" id="reviews">
     <div class="wrap">
       <div class="sec-head rise">
-        <p class="kicker">Customer reviews</p>
-        <h2>What Filipino families say after switching.</h2>
+        <p class="kicker">Our customers</p>
+        <h2>Real roofs, in real places.</h2>
+        <p class="lede">These are photographs from the jobs themselves, each one taken on the day and matched to the house it belongs to. Where a job had a location, it is named.</p>
       </div>
-      <div class="reviews stag">
-        <article class="rev lead">
-          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <q>Our bill went down from &#8369;9,000 to &#8369;900 a month.</q>
-          <p class="who">Rowena C., Cavite</p>
-        </article>
-        <article class="rev">
-          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <q>Best decision we made last year. The bill really went down and we are more comfortable with our energy setup.</q>
-          <p class="who">Jun D., Antipolo City</p>
-        </article>
-        <article class="rev">
-          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <q>The team was professional from consultation to installation. They explained clearly what suited our home.</q>
-          <p class="who">Alisha S., Cavite</p>
-        </article>
-        <article class="rev">
-          <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <q>Worth every peso. The relationship did not end after installation. There is still follow up support.</q>
-          <p class="who">Roman G., Batangas</p>
-        </article>
+
+      <div class="jobgal stag">
+        <figure class="job wide">
+          <img src="assets/jobs/laguna-array.jpg" width="590" height="443" alt="Solar panels being fitted across a green metal roof, with neighbouring houses and trees around" loading="lazy" decoding="async">
+          <figcaption><b>8 kW system, Bi&ntilde;an, Laguna</b>Near the Mamplasan exit. Fitted in September 2026, in the rain.</figcaption>
+        </figure>
+        <figure class="job">
+          <img src="assets/jobs/pampanga-install.jpg" width="590" height="443" alt="Two installers fixing solar panels to a roof at sunset, rice fields stretching out behind" loading="lazy" decoding="async">
+          <figcaption><b>Mexico, Pampanga</b>Panels going down at golden hour, August 2026.</figcaption>
+        </figure>
+        <figure class="job">
+          <img src="assets/jobs/laguna-inverter.jpg" width="443" height="590" alt="An installer on a ladder fitting an inverter to an interior wall" loading="lazy" decoding="async">
+          <figcaption><b>The inverter side</b>The same Laguna job, indoors. The panels are only half the work.</figcaption>
+        </figure>
+        <figure class="job">
+          <img src="assets/jobs/subcon-inverters.jpg" width="443" height="590" alt="Two wall-mounted inverters with battery units below them" loading="lazy" decoding="async">
+          <figcaption><b>12 kW build</b>Inverters and batteries mounted, July 2026.</figcaption>
+        </figure>
+        <figure class="job wide">
+          <img src="assets/jobs/qc-roof.jpg" width="590" height="230" alt="Mounting rails being fitted to a red roof on a Metro Manila street, overhead cables above" loading="lazy" decoding="async">
+          <figcaption><b>Tandang Sora, Quezon City</b>Mounting rails going up, August 2026.</figcaption>
+        </figure>
+      </div>
+
+      <div class="saidwrap rise">
+        <h3 class="saidhead">And what customers have said</h3>
+        <div class="reviews stag">
+          <article class="rev lead">
+            <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <q>Our bill went down from &#8369;9,000 to &#8369;900 a month.</q>
+            <p class="who">Rowena C., Cavite</p>
+          </article>
+          <article class="rev">
+            <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <q>Best decision we made last year. The bill really went down and we are more comfortable with our energy setup.</q>
+            <p class="who">Jun D., Antipolo City</p>
+          </article>
+          <article class="rev">
+            <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <q>The team was professional from consultation to installation. They explained clearly what suited our home.</q>
+            <p class="who">Alisha S., Cavite</p>
+          </article>
+          <article class="rev">
+            <div class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <q>Worth every peso. The relationship did not end after installation. There is still follow up support.</q>
+            <p class="who">Roman G., Batangas</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>

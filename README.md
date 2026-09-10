@@ -51,7 +51,13 @@ Then open <http://localhost:8123> in a browser. Chrome shows scroll roughness fi
 
 ## Things worth knowing before changing content
 
-- **The reviews are real customer quotes.** Verify any new one, and the figures in it, before publishing.
+- **The reviews section is photo-led.** The five job photos in `assets/jobs/` are real photos from
+  Engr Emil Caina's posts, each matched to the post it came from, so every caption names the place
+  that post named. **Do not move a photo to a different job.**
+- **The customer electricity bills are deliberately not published.** The photos of them show the
+  account holder's name, address and account number. If you ever want the savings proof on the
+  site, the identifying fields have to be cropped or redacted first, and the customer has to agree.
+- **The written quotes are still unverified.** Verify each name and figure before relying on them.
 - **The calculator implements `solar_energy_potential_system.md`** (the Solar Energy Potential System spec).
   One chain drives everything, so the picture, the equipment list and the pesos cannot disagree:
   `consumption = bill ÷ RATE` (or the customer typed real kWh) → `kWp = daily × goal offset ÷ (PSH × EFF)`

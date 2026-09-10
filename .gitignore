@@ -25,3 +25,9 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+# Raw scraped photo dump: 63 files but only 22 unique images, and four of those
+# are unrelated posts the scraper picked up. The five vetted job photos that
+# actually ship live in ec-solar-solutions/assets/jobs/.
+solar-photos/
+emil_caina_solar_posts.xlsx
