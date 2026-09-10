@@ -64,6 +64,12 @@ Then open <http://localhost:8123> in a browser. Chrome shows scroll roughness fi
 - **The brownout answer in the FAQ is deliberately blunt.** A normal grid-tied system shuts off during a brownout for safety, and only a hybrid or off-grid system with a battery keeps a home running. Please keep that accurate.
 - The lead form opens the visitor's email app addressed to the business. There is no backend.
 
+## Also in this folder
+
+`ebook-studio/` is a separate app: drop in a manuscript and it builds an ebook plus matching
+cover, chapter openers and quote cards, all editable. It shares nothing with the site beyond the
+same no-build, no-server approach. See [ebook-studio/README.md](ebook-studio/README.md).
+
 ## Contact
 
 Phone: +63 994 025 7286

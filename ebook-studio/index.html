@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ebook Studio</title>
+<meta name="description" content="Design ebook graphics and turn uploaded manuscripts into finished ebooks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">Ebook Studio</span>
+  </div>
+
+  <input id="projectTitle" class="title-field" value="Untitled ebook" aria-label="Project title" spellcheck="false">
+
+  <nav class="tabs" role="tablist">
+    <button class="tab is-active" data-view="dashboard" role="tab">Dashboard</button>
+    <button class="tab" data-view="editor" role="tab">Design</button>
+    <button class="tab" data-view="book" role="tab">Book</button>
+  </nav>
+
+  <div class="topbar-actions">
+    <span id="saveState" class="save-state">Saved</span>
+    <button id="btnExport" class="btn btn-primary">Export</button>
+  </div>
+</header>
+
+<!-- Dashboard -->
+<main id="view-dashboard" class="view is-active">
+  <div class="dash">
+
+    <section class="dash-hero">
+      <h1>Turn slides into an ebook people actually work through.</h1>
+      <p>Drop in a <code>.pptx</code> and every slide becomes a lesson: the bullets are redrawn as a diagram
+         rather than reprinted as paragraphs, and each one comes with something to do &mdash; a gap to fill,
+         a question to answer, an order to work out. Crosswords, word searches and an answer key are built
+         from your own terms. <code>.docx</code>, <code>.md</code>, <code>.txt</code> and <code>.html</code>
+         work too. Everything it makes stays editable.</p>
+
+      <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose a slide deck or manuscript">
+        <svg viewBox="0 0 24 24" class="dz-icon" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+        <strong>Drop your slides or manuscript here</strong>
+        <span>or click to browse &mdash; .pptx, .docx, .md, .txt, .html</span>
+      </div>
+
+      <!-- Kept outside the dropzone: an input inside it would bubble its own
+           click back to the zone and ask for the file picker twice. -->
+      <input type="file" id="fileInput" hidden>
+
+      <div id="uploadError" class="upload-error" hidden>
+        <div>
+          <strong id="uploadErrorTitle"></strong>
+          <p id="uploadErrorBody"></p>
+        </div>
+        <button class="icon-btn" id="uploadErrorClose" aria-label="Dismiss">&#10005;</button>
+      </div>
+
+      <p class="dz-note">Nothing is uploaded anywhere. The file is read in your browser and stored on this computer only.</p>
+    </section>
+
+    <section id="importSummary" class="panel-card" hidden>
+      <div class="card-head">
+        <h2>What we found</h2>
+        <button class="btn btn-ghost btn-sm" id="btnClearImport">Start over</button>
+      </div>
+      <div id="importStats" class="stat-row"></div>
+      <div id="chapterList" class="chapter-list"></div>
+    </section>
+
+    <section id="learningSection" class="panel-card" hidden>
+      <div class="card-head">
+        <h2>Active learning</h2>
+        <span class="hint">What the reader is asked to do, and how often.</span>
+      </div>
+
+      <div class="build-row build-row-top">
+        <label class="field">
+          <span>How much practice</span>
+          <select id="densitySelect">
+            <option value="light">Light &mdash; one task every other lesson</option>
+            <option value="balanced" selected>Balanced &mdash; one task per lesson</option>
+            <option value="intensive">Intensive &mdash; two tasks per lesson</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Lessons per part</span>
+          <select id="groupSelect">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="panel-title">Include</p>
+      <div id="activityChips" class="chip-row"></div>
+
+      <div class="build-row">
+        <p class="hint hint-wide">Questions, gaps and puzzles are derived from your own slides &mdash; the wording
+           comes from your text, not from anything invented. Every one of them is editable afterwards.</p>
+      </div>
+    </section>
+
+    <section id="themeSection" class="panel-card" hidden>
+      <div class="card-head">
+        <h2>Pick a look</h2>
+        <span class="hint">This drives the cover, the openers and the book pages.</span>
+      </div>
+      <div id="themeGrid" class="theme-grid"></div>
+      <div class="build-row">
+        <label class="field">
+          <span>Trim size</span>
+          <select id="trimSelect"></select>
+        </label>
+        <label class="field">
+          <span>Author name</span>
+          <input id="authorField" placeholder="Your name" spellcheck="false">
+        </label>
+        <button id="btnBuild" class="btn btn-primary btn-lg">Build my ebook</button>
+      </div>
+    </section>
+
+    <section id="graphicsSection" class="panel-card" hidden>
+      <div class="card-head">
+        <h2>Graphics</h2>
+        <div class="card-head-actions">
+          <button class="btn btn-ghost btn-sm" data-new-design="social">+ Social card</button>
+          <button class="btn btn-ghost btn-sm" data-new-design="quote">+ Quote card</button>
+          <button class="btn btn-ghost btn-sm" data-new-design="blank">+ Blank</button>
+        </div>
+      </div>
+      <div id="designGrid" class="design-grid"></div>
+    </section>
+
+    <section class="panel-card panel-empty" id="emptyState">
+      <h2>Nothing loaded yet</h2>
+      <p>Upload a file above, or try
+         <button class="linkish" id="btnSampleDeck">a sample slide deck</button> or
+         <button class="linkish" id="btnSample">a sample manuscript</button>
+         to see how each one turns out.</p>
+    </section>
+
+  </div>
+</main>
+
+<!-- Editor -->
+<main id="view-editor" class="view">
+  <div class="editor">
+
+    <aside class="rail">
+      <button class="rail-btn is-active" data-panel="templates" title="Templates"><span>&#9638;</span>Templates</button>
+      <button class="rail-btn" data-panel="text" title="Text"><span>T</span>Text</button>
+      <button class="rail-btn" data-panel="elements" title="Elements"><span>&#9670;</span>Elements</button>
+      <button class="rail-btn" data-panel="uploads" title="Uploads"><span>&#8679;</span>Uploads</button>
+      <button class="rail-btn" data-panel="brand" title="Brand"><span>&#9681;</span>Brand</button>
+    </aside>
+
+    <section class="side-panel" id="sidePanel"></section>
+
+    <section class="stage-wrap">
+      <div class="stage-bar">
+        <select id="designPicker" class="mini-select" aria-label="Which graphic"></select>
+        <div class="spacer"></div>
+        <div class="tool-group">
+          <button class="icon-btn" id="btnUndo" title="Undo (Ctrl+Z)">&#8630;</button>
+          <button class="icon-btn" id="btnRedo" title="Redo (Ctrl+Shift+Z)">&#8631;</button>
+        </div>
+        <div class="tool-group">
+          <button class="icon-btn" data-arrange="front" title="Bring to front">&#10514;</button>
+          <button class="icon-btn" data-arrange="forward" title="Forward">&#8593;</button>
+          <button class="icon-btn" data-arrange="backward" title="Backward">&#8595;</button>
+          <button class="icon-btn" data-arrange="back" title="Send to back">&#10515;</button>
+        </div>
+        <div class="tool-group">
+          <button class="icon-btn" data-align="left" title="Align left">&#8676;</button>
+          <button class="icon-btn" data-align="centerX" title="Centre horizontally">&#8596;</button>
+          <button class="icon-btn" data-align="right" title="Align right">&#8677;</button>
+          <button class="icon-btn" data-align="centerY" title="Centre vertically">&#8597;</button>
+        </div>
+        <div class="tool-group">
+          <button class="icon-btn" id="btnZoomOut" title="Zoom out">&minus;</button>
+          <span id="zoomLabel" class="zoom-label">100%</span>
+          <button class="icon-btn" id="btnZoomIn" title="Zoom in">+</button>
+          <button class="icon-btn" id="btnZoomFit" title="Fit">&#10530;</button>
+        </div>
+        <button class="btn btn-primary btn-sm" id="btnDownloadPng">Download PNG</button>
+      </div>
+
+      <div class="stage-scroll" id="stageScroll">
+        <div class="stage" id="stage">
+          <div class="artboard" id="artboard"></div>
+          <div class="overlay" id="overlay"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="props" id="props"></section>
+  </div>
+</main>
+
+<!-- Book -->
+<main id="view-book" class="view">
+  <div class="book-wrap">
+    <aside class="book-side">
+      <h2>Contents</h2>
+      <ol id="bookToc" class="book-toc"></ol>
+      <div class="book-side-foot">
+        <button class="btn btn-ghost btn-sm" id="btnPrintBook">Print / Save as PDF</button>
+      </div>
+    </aside>
+    <div class="book-scroll" id="bookScroll"></div>
+  </div>
+</main>
+
+<!-- Export -->
+<div class="modal-backdrop" id="exportModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="exportTitle">
+    <div class="modal-head">
+      <h2 id="exportTitle">Export</h2>
+      <button class="icon-btn" id="btnCloseExport" aria-label="Close">&#10005;</button>
+    </div>
+    <div class="export-list">
+      <button class="export-row" data-export="pdf">
+        <strong>PDF</strong><span>Opens the print dialog. Choose &ldquo;Save as PDF&rdquo;. Trim size and page breaks are already set.</span>
+      </button>
+      <button class="export-row" data-export="epub">
+        <strong>EPUB</strong><span>A real .epub with a cover, table of contents and reflowable chapters. Works on Kindle, Apple Books, Kobo.</span>
+      </button>
+      <button class="export-row" data-export="html">
+        <strong>Web page</strong><span>One self-contained .html file of the whole book. Nothing else to upload.</span>
+      </button>
+      <button class="export-row" data-export="images">
+        <strong>All graphics (.zip)</strong><span>Every design as a 2&times; PNG &mdash; covers, openers, quote cards, social posts.</span>
+      </button>
+      <button class="export-row" data-export="project">
+        <strong>Project file (.json)</strong><span>Back up or move the whole project, text and designs together.</span>
+      </button>
+    </div>
+    <div class="modal-foot">
+      <label class="import-project">
+        <input type="file" id="projectImport" accept=".json" hidden>
+        <span class="linkish">Open a project file&hellip;</span>
+      </label>
+      <span id="exportStatus" class="hint"></span>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+<div id="printRoot" class="print-root" aria-hidden="true"></div>
+
+<script src="js/text.js"></script>
+<script src="js/zip.js"></script>
+<script src="js/store.js"></script>
+<script src="js/templates.js"></script>
+<script src="js/import.js"></script>
+<script src="js/pptx.js"></script>
+<script src="js/diagrams.js"></script>
+<script src="js/learning.js"></script>
+<script src="js/course.js"></script>
+<script src="js/sampledeck.js"></script>
+<script src="js/render.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/book.js"></script>
+<script src="js/export.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

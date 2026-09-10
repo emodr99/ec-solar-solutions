@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx.cmd",
       "runtimeArgs": ["-y", "http-server", "./ec-solar-solutions", "-p", "8123", "-c-1", "--silent"],
       "port": 8123
+    },
+    {
+      "name": "ebook-studio",
+      "runtimeExecutable": "npx.cmd",
+      "runtimeArgs": ["-y", "http-server", "./ebook-studio", "-p", "8124", "-c-1", "--silent"],
+      "port": 8124
     }
   ]
 }
