@@ -52,15 +52,16 @@ Then open <http://localhost:8123> in a browser. Chrome shows scroll roughness fi
 ## Things worth knowing before changing content
 
 - **The reviews are real customer quotes.** Verify any new one, and the figures in it, before publishing.
-- **The calculator is an estimate, not a quotation.** Every figure on it comes from one chain, so
-  the picture, the system size and the pesos can never disagree:
-  `power used = bill ÷ RATE` → `kWp = power × DAYTIME_SHARE ÷ (30 × PSH × PR)` →
-  `production = kWp × PSH × PR × 30` → `savings = production × RATE`, capped at the bill.
-  It is driven by five constants at the top of the calculator script: `RATE` (₱14.7833/kWh),
-  `PSH` (4.8 sun hours), `PR` (0.78 performance ratio), `DAYTIME_SHARE` (0.55) and
-  `PANEL_KW` (0.6 kWp per panel). **`PR` matters most:** it accounts for roof heat, inverter
-  and wiring losses, and leaving it out undersizes a system by about a quarter. Change these five
-  and the whole calculator, including the animation, follows.
+- **The calculator implements `solar_energy_potential_system.md`** (the Solar Energy Potential System spec).
+  One chain drives everything, so the picture, the equipment list and the pesos cannot disagree:
+  `consumption = bill ÷ RATE` (or the customer typed real kWh) → `kWp = daily × goal offset ÷ (PSH × EFF)`
+  → rounded up to whole 550 W panels → `production = kWp × PSH × EFF × 30` → savings split into
+  self-consumption at the full rate and export at the net-metering credit.
+  Constants sit at the top of the calculator script: `RATE` ₱12.14/kWh, `PSH` 4.5, `EFF` 0.80,
+  `PANEL_W` 550, `DOD` 0.80, `EXPORT_RATE` ₱6.50 **(needs confirming)**, `MAX_CUT` 0.90.
+  The three goal buttons map to Options A, B and C in the spec (target offsets 0.85 / 1.00 / 1.15).
+  **`MAX_CUT` exists on purpose:** part of a Meralco bill is fixed charges, and the spec forbids
+  promising a zero bill, so the displayed saving is held below the full amount.
 - **The brownout answer in the FAQ is deliberately blunt.** A normal grid-tied system shuts off during a brownout for safety, and only a hybrid or off-grid system with a battery keeps a home running. Please keep that accurate.
 - The lead form opens the visitor's email app addressed to the business. There is no backend.
 

@@ -639,33 +639,46 @@ input[type=range]::-moz-range-thumb{
 .assump b{color:var(--text-primary);font-weight:600}
 .calccta{margin-top:24px}
 
+/* pick what you want solar to do */
+.goalq{display:block;margin-bottom:12px}
+.goals{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.goal{
+  font-family:var(--body);font-size:.86rem;font-weight:500;cursor:pointer;
+  padding:10px 15px;border-radius:999px;border:1px solid var(--line-strong);
+  background:var(--panel);color:var(--text-secondary);
+  transition:background-color .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
+}
+.goal:hover{border-color:var(--accent);color:var(--text-primary)}
+.goal.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+@media(pointer:coarse){.goal{min-height:44px}}
+
+/* the customer's real kWh, which beats any estimate from the peso amount */
+.actual{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+.actual > label{
+  display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-secondary);margin-bottom:10px;
+}
+.actualrow{display:flex;align-items:center;gap:10px}
+.actualrow input{max-width:150px}
+.actualrow .unit{font-family:var(--mono);font-size:.72rem;color:var(--text-secondary);white-space:nowrap}
+
 /* the panel array: each slot fades in as the system grows, staggered front to back */
 .pnl{
   fill:rgba(60,80,72,.10);stroke:rgba(60,80,72,.30);stroke-width:1;stroke-dasharray:3 3;
   transition:fill .45s var(--ease),stroke .45s var(--ease),stroke-dasharray .01s;
-  transition-delay:calc(var(--i,0) * 22ms);
+  transition-delay:calc(var(--i,0) * 14ms);
 }
 .pnl.on{fill:url(#pnlOn);stroke:rgba(11,44,60,.85);stroke-dasharray:none}
 #dialSun,#dialRays,#dialGlow,#dialPool,#coverFill{transition:all .5s var(--ease)}
-#dialCount{transition:none}
 
-/* how much of the bill the roof covers */
+/* how much of the year's power the roof covers */
 .cover{margin-top:22px}
-.coverbar{
-  height:12px;border-radius:99px;background:rgba(35,46,34,.16);overflow:hidden;
-  border:1px solid var(--line);
-}
-.coverbar span{
-  display:block;height:100%;border-radius:99px;
-  background:linear-gradient(90deg,var(--gold),var(--accent));
-  transition:width .5s var(--ease);
-}
-.coverlbl{margin-top:9px;font-size:.86rem;color:var(--text-secondary)}
+.coverbar{height:12px;border-radius:99px;background:rgba(35,46,34,.16);overflow:hidden;border:1px solid var(--line)}
+.coverbar span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--accent));transition:width .5s var(--ease)}
+.coverlbl{margin-top:9px;font-size:.84rem;color:var(--text-secondary);line-height:1.55}
 .coverlbl b{color:var(--accent-deep);font-weight:600}
 
-@media (prefers-reduced-motion: reduce){
-  .pnl{transition-delay:0s !important}
-}
+@media (prefers-reduced-motion: reduce){ .pnl{transition-delay:0s !important} }
 
 /* --- FAQ --- */
 .faq{display:grid;margin-top:44px;border-top:1px solid var(--line)}
@@ -1178,9 +1191,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section class="sec calc" id="calculator">
     <div class="wrap">
       <div class="sec-head rise">
-        <p class="kicker">Solar potential calculator</p>
-        <h2>See what solar could do for your home.</h2>
-        <p class="lede">Drag the slider to your usual monthly bill. The roof fills with the panels your home would need, and every number below comes from that same system. This is an estimate, and the whole calculation is written out underneath.</p>
+        <p class="kicker">Solar energy potential</p>
+        <h2>Know your energy. Calculate your solar.</h2>
+        <p class="lede">Tell us your Meralco bill and what you want solar to do for you. The roof fills with the panels you would need, and every figure below comes from that same system. This is a preliminary estimate, not a final engineering design.</p>
       </div>
 
       <div class="calcbox rise">
@@ -1188,7 +1201,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <div class="calcleft">
             <div class="dial">
               <svg viewBox="0 0 600 300" id="dialSvg" role="img" aria-labelledby="dialTitle">
-                <title id="dialTitle">A rooftop seen from above, filling with solar panels as the monthly bill increases</title>
+                <title id="dialTitle">A rooftop filling with 550 watt solar panels as the bill and goal change</title>
                 <defs>
                   <linearGradient id="dsky" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stop-color="#16463A"/><stop offset="100%" stop-color="#09211C"/>
@@ -1196,111 +1209,157 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
                   <radialGradient id="dsun" cx="50%" cy="50%" r="50%">
                     <stop offset="0%" stop-color="#FFF8DC"/><stop offset="42%" stop-color="#FFD24A"/><stop offset="100%" stop-color="#F2820F"/>
                   </radialGradient>
-                  <linearGradient id="pnlOn" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#4FA6CE"/><stop offset="50%" stop-color="#1E6588"/><stop offset="100%" stop-color="#0B2C3C"/>
-                  </linearGradient>
                   <radialGradient id="sunWash" cx="50%" cy="50%" r="50%">
                     <stop offset="0%" stop-color="rgba(255,214,130,.22)"/>
                     <stop offset="100%" stop-color="rgba(255,214,130,0)"/>
                   </radialGradient>
+                  <linearGradient id="pnlOn" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#4FA6CE"/><stop offset="50%" stop-color="#1E6588"/><stop offset="100%" stop-color="#0B2C3C"/>
+                  </linearGradient>
                   <linearGradient id="roofG2" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stop-color="#DDE6E0"/><stop offset="100%" stop-color="#9FB3A9"/>
                   </linearGradient>
                 </defs>
-
                 <rect width="600" height="300" fill="url(#dsky)"/>
                 <rect id="dialGlow" width="600" height="300" fill="rgba(255,197,61,0)"/>
-
                 <ellipse id="dialRays" cx="470" cy="120" rx="300" ry="200" fill="url(#sunWash)" opacity="0"/>
                 <g id="dialSun" transform="translate(515,62)">
                   <circle r="56" fill="rgba(255,197,61,.12)"/>
                   <circle r="34" fill="rgba(255,197,61,.20)"/>
                   <circle r="20" fill="url(#dsun)"/>
                 </g>
-
                 <ellipse id="dialPool" cx="268" cy="232" rx="238" ry="30" fill="rgba(255,206,120,0)"/>
-
-                <!-- the roof plane, and the array that grows on it. Both share one
-                     transform so the panels always sit flat on the roof. -->
-                <g transform="translate(150,84) skewX(-24) scale(1,0.62)">
-                  <rect x="-24" y="-20" width="336" height="196" rx="5" fill="url(#roofG2)"/>
-                  <g stroke="rgba(60,80,72,.22)" stroke-width="1.4" fill="none"><path d="M-20 -18 L-20 174"/><path d="M-7 -18 L-7 174"/><path d="M6 -18 L6 174"/><path d="M19 -18 L19 174"/><path d="M32 -18 L32 174"/><path d="M45 -18 L45 174"/><path d="M58 -18 L58 174"/><path d="M71 -18 L71 174"/><path d="M84 -18 L84 174"/><path d="M97 -18 L97 174"/><path d="M110 -18 L110 174"/><path d="M123 -18 L123 174"/><path d="M136 -18 L136 174"/><path d="M149 -18 L149 174"/><path d="M162 -18 L162 174"/><path d="M175 -18 L175 174"/><path d="M188 -18 L188 174"/><path d="M201 -18 L201 174"/><path d="M214 -18 L214 174"/><path d="M227 -18 L227 174"/><path d="M240 -18 L240 174"/><path d="M253 -18 L253 174"/><path d="M266 -18 L266 174"/><path d="M279 -18 L279 174"/><path d="M292 -18 L292 174"/><path d="M305 -18 L305 174"/></g>
-                  <rect x="-24" y="-20" width="336" height="196" rx="5" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2.5"/>
-                    <rect class="pnl" style="--i:0" x="0" y="120" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:1" x="58" y="120" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:2" x="116" y="120" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:3" x="174" y="120" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:4" x="232" y="120" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:5" x="0" y="80" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:6" x="58" y="80" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:7" x="116" y="80" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:8" x="174" y="80" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:9" x="232" y="80" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:10" x="0" y="40" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:11" x="58" y="40" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:12" x="116" y="40" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:13" x="174" y="40" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:14" x="232" y="40" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:15" x="0" y="0" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:16" x="58" y="0" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:17" x="116" y="0" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:18" x="174" y="0" width="52" height="34" rx="2"/>
-                    <rect class="pnl" style="--i:19" x="232" y="0" width="52" height="34" rx="2"/>
-                </g>
-
+                <g transform="translate(158,96) skewX(-24) scale(1,0.62)">
+                  <rect x="-20" y="-16" width="316" height="180" rx="5" fill="url(#roofG2)"/>
+                  <g stroke="rgba(60,80,72,.22)" stroke-width="1.2" fill="none"><path d="M-16 -14 L-16 148"/><path d="M-4 -14 L-4 148"/><path d="M8 -14 L8 148"/><path d="M20 -14 L20 148"/><path d="M32 -14 L32 148"/><path d="M44 -14 L44 148"/><path d="M56 -14 L56 148"/><path d="M68 -14 L68 148"/><path d="M80 -14 L80 148"/><path d="M92 -14 L92 148"/><path d="M104 -14 L104 148"/><path d="M116 -14 L116 148"/><path d="M128 -14 L128 148"/><path d="M140 -14 L140 148"/><path d="M152 -14 L152 148"/><path d="M164 -14 L164 148"/><path d="M176 -14 L176 148"/><path d="M188 -14 L188 148"/><path d="M200 -14 L200 148"/><path d="M212 -14 L212 148"/><path d="M224 -14 L224 148"/><path d="M236 -14 L236 148"/><path d="M248 -14 L248 148"/><path d="M260 -14 L260 148"/><path d="M272 -14 L272 148"/><path d="M284 -14 L284 148"/><path d="M296 -14 L296 148"/></g>
+                  <rect x="-20" y="-16" width="316" height="180" rx="5" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2.5"/>
+                    <rect class="pnl" style="--i:0" x="0" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:1" x="36" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:2" x="72" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:3" x="108" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:4" x="144" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:5" x="180" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:6" x="216" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:7" x="252" y="125" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:8" x="0" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:9" x="36" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:10" x="72" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:11" x="108" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:12" x="144" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:13" x="180" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:14" x="216" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:15" x="252" y="100" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:16" x="0" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:17" x="36" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:18" x="72" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:19" x="108" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:20" x="144" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:21" x="180" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:22" x="216" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:23" x="252" y="75" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:24" x="0" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:25" x="36" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:26" x="72" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:27" x="108" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:28" x="144" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:29" x="180" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:30" x="216" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:31" x="252" y="50" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:32" x="0" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:33" x="36" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:34" x="72" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:35" x="108" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:36" x="144" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:37" x="180" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:38" x="216" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:39" x="252" y="25" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:40" x="0" y="0" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:41" x="36" y="0" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:42" x="72" y="0" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:43" x="108" y="0" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:44" x="144" y="0" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:45" x="180" y="0" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:46" x="216" y="0" width="32" height="21" rx="1.5"/>
+                    <rect class="pnl" style="--i:47" x="252" y="0" width="32" height="21" rx="1.5"/>                </g>
                 <text x="26" y="34" fill="rgba(240,223,196,.72)" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4">PANELS ON YOUR ROOF</text>
-                <text id="dialCount" x="26" y="64" fill="#FFD24A" font-family="IBM Plex Mono, monospace" font-size="24" letter-spacing="1">4</text>
+                <text id="dialCount" x="26" y="64" fill="#FFD24A" font-family="IBM Plex Mono, monospace" font-size="24" letter-spacing="1">14</text>
+                <text x="26" y="84" fill="rgba(240,223,196,.6)" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.2">550 W EACH</text>
               </svg>
             </div>
 
-            <div class="billrow"><span class="lbl">Your average monthly electric bill</span></div>
-            <div class="billval" id="billOut">&#8369;6,000</div>
-            <label for="bill" class="sr">Average monthly electricity bill in pesos</label>
-            <input type="range" id="bill" min="1000" max="30000" step="500" value="6000" aria-describedby="billOut">
+            <div class="billrow"><span class="lbl">Your average monthly Meralco bill</span></div>
+            <div class="billval" id="billOut">&#8369;10,000</div>
+            <label for="bill" class="sr">Average monthly Meralco bill in pesos</label>
+            <input type="range" id="bill" min="1000" max="30000" step="500" value="10000" aria-describedby="billOut">
             <p class="hint">From &#8369;1,000 to &#8369;30,000 a month. You can also use the arrow keys.</p>
+
+            <div class="actual">
+              <label for="kwhIn">Know your actual kWh? Use it instead, it is far more accurate</label>
+              <div class="actualrow">
+                <input type="text" id="kwhIn" inputmode="numeric" placeholder="e.g. 824" aria-describedby="kwhNote">
+                <span class="unit">kWh / month</span>
+              </div>
+              <p class="hint" id="kwhNote">It is printed on your Meralco bill. Leave this empty to estimate it from the peso amount.</p>
+            </div>
           </div>
 
           <div class="calcright">
+            <p class="lbl goalq" id="goalLabel">What do you want solar to do?</p>
+            <div class="goals" role="radiogroup" aria-labelledby="goalLabel">
+              <button type="button" class="goal on" data-goal="bill" role="radio" aria-checked="true">Reduce my bill</button>
+              <button type="button" class="goal" data-goal="backup" role="radio" aria-checked="false">Backup during brownouts</button>
+              <button type="button" class="goal" data-goal="indep" role="radio" aria-checked="false">Energy independence</button>
+            </div>
+
             <div class="readout" aria-live="polite">
               <div class="ro">
-                <span class="lbl">1. Power you use</span>
-                <span class="val" id="outKwh">406<small>kWh per month</small></span>
+                <span class="lbl">Estimated consumption</span>
+                <span class="val" id="outKwh">824<small>kWh / month</small></span>
               </div>
               <div class="ro">
-                <span class="lbl">2. Suggested system size</span>
-                <span class="val" id="outKw">2.0<small>kWp, about 4 panels</small></span>
+                <span class="lbl">Recommended solar</span>
+                <span class="val" id="outKw">7.7<small>kWp</small></span>
               </div>
               <div class="ro">
-                <span class="lbl">3. What that system makes</span>
-                <span class="val" id="outProd">225<small>kWh per month</small></span>
+                <span class="lbl">Solar panels</span>
+                <span class="val" id="outPanels">14<small>&#215; 550 W</small></span>
+              </div>
+              <div class="ro">
+                <span class="lbl">Recommended inverter</span>
+                <span class="val" id="outInv">8<small>kW hybrid</small></span>
+              </div>
+              <div class="ro" id="battRow">
+                <span class="lbl">Recommended battery</span>
+                <span class="val" id="outBatt">10 to 15<small>kWh</small></span>
+              </div>
+              <div class="ro">
+                <span class="lbl">Estimated production</span>
+                <span class="val" id="outProd">832<small>kWh / month</small></span>
               </div>
               <div class="ro hi">
-                <span class="lbl">4. Possible drop in your monthly bill</span>
-                <span class="val" id="outSave">&#8369;2,861 to &#8369;3,761</span>
-              </div>
-              <div class="ro hi">
-                <span class="lbl">Over one year</span>
-                <span class="val" id="outYear">&#8369;34,332 to &#8369;45,132</span>
+                <span class="lbl">Estimated saving on your bill</span>
+                <span class="val" id="outSave">&#8369;7,189<small>/ month</small></span>
               </div>
             </div>
 
             <div class="cover">
-              <div class="coverbar"><span id="coverFill" style="width:55%"></span></div>
-              <p class="coverlbl"><b id="coverPct">55%</b> of your bill covered by your roof, the rest still from the grid</p>
+              <div class="coverbar"><span id="coverFill" style="width:87%"></span></div>
+              <p class="coverlbl"><b id="coverPct">87%</b> solar offset. <span id="splitNote"></span></p>
             </div>
 
             <p class="assump">
-              <b>The whole calculation.</b>
-              Power used = bill &#247; &#8369;14.7833 per kWh.
-              System size = that power &#215; 55% used in daylight &#247; (4.8 sun hours &#215; 0.78 performance ratio &#215; 30 days).
-              Production = system size &#215; 4.8 &#215; 0.78 &#215; 30.
-              Savings = production &#215; &#8369;14.7833, never more than your bill.
-              The range comes from real variation in weather and heat: 4.3 to 5.3 sun hours and a 0.75 to 0.80 performance ratio.
-              <b>This is an estimate, not a quotation.</b> The free assessment measures your own roof, your own usage and your own shading.
+              <b>How this is worked out.</b>
+              Consumption = bill &#247; &#8369;12.14 per kWh, unless you enter your real kWh.
+              Solar produced = capacity &#215; 4.5 peak sun hours &#215; 80% system efficiency.
+              Capacity = daily consumption &#215; the target offset for your goal &#247; (4.5 &#215; 0.80), rounded up to whole 550 W panels.
+              Battery = backup energy needed &#247; 80% usable depth of discharge.
+              <b>Generation is not the same as bill reduction.</b> Power used the moment it is made replaces electricity at the full rate. Power exported to the grid is credited lower under net metering, so the two are counted separately.
+              Part of every Meralco bill is fixed charges that no system removes, so the saving is capped short of the full amount and we never promise a zero bill.
+              <b>This is a preliminary estimate, not a final design.</b> Real figures need your actual bill history, a site inspection, roof measurements, and a shading and load analysis. We do not promise a zero Meralco bill.
             </p>
 
             <div class="calccta"><a class="btn btn-primary" href="#assessment">Get My Free Assessment</a></div>
-            <p class="hint" style="margin-top:14px">Want us to make this estimate accurate for your actual home?</p>
+            <p class="hint" style="margin-top:14px">Want the real numbers for your actual roof?</p>
           </div>
         </div>
       </div>
@@ -1851,88 +1910,133 @@ if(stage3d){
   sIO.observe(stage3d);
 }
 
-/* ---------- the calculator ----------
-   Every number on screen comes from this one chain, so the picture, the system
-   size and the pesos can never disagree with each other:
+/* ---------- the solar energy potential calculator ----------
+   Implements the Solar Energy Potential System spec. Every figure on screen
+   comes from this one chain, so the picture, the equipment list and the pesos
+   can never disagree with each other:
 
-     power used   = bill / RATE
-     system kWp   = power used * DAYTIME_SHARE / (30 * PSH * PR)
-     production   = kWp * PSH * PR * 30
-     savings      = production * RATE, capped at the bill
+     consumption  = bill / RATE            (or the customer's real kWh)
+     daily        = consumption / 30
+     required kWp = daily * target offset / (PSH * EFF)
+     panels       = ceil(required kWp / PANEL_KW)     whole panels only
+     installed    = panels * PANEL_KW
+     production   = installed * PSH * EFF * 30
+     battery      = backup energy needed / DOD
+     savings      = self-consumed at the full rate + exported at the credit rate
 
-   PR is the performance ratio: real panels lose output to roof heat, inverter
-   conversion, soiling and wiring. Leaving it out undersizes a system by about
-   a quarter. Change these five constants and the whole calculator follows.  */
-var RATE=14.7833;        // pesos per kWh
-var PSH=4.8;             // peak sun hours per day, yearly average
-var PR=0.78;             // performance ratio
-var DAYTIME_SHARE=0.55;  // share of household power used while the sun is up
-var PANEL_KW=0.6;        // one panel, kWp
+   Generation is NOT the same as bill reduction, which is why the last line
+   splits self-consumption from export instead of valuing every kWh at retail.  */
+var RATE=12.14;          // Meralco reference rate, pesos per kWh
+var PSH=4.5;             // peak sun hours per day
+var EFF=0.80;            // system efficiency
+var PANEL_W=550;         // watts per panel
+var PANEL_KW=PANEL_W/1000;
+var DOD=0.80;            // usable depth of discharge
+var EXPORT_RATE=6.50;    // net metering export credit, pesos per kWh  << CONFIRM THIS
+var DAY_SHARE=0.55;      // share of consumption during daylight, no battery
+var BATT_SELF=0.90;      // effective self-consumption once a battery shifts the evening
+var MAX_CUT=0.90;        // never show more than this share of the bill removed: part of a
+                         // Meralco bill is fixed charges that solar cannot touch, and the
+                         // spec is explicit that a zero bill must not be promised
+var INV=[3,3.6,5,6,8,10,12,15,20,25,30,40,50];
 
-// the honest spread: weather and heat, not an invented percentage
-var PSH_LO=4.3, PSH_HI=5.3, PR_LO=0.75, PR_HI=0.80;
-var MIN_KW=1.0;          // smallest system worth installing
+// target offset and backup window per goal, matching Options A, B and C in the spec
+var GOALS={
+  bill  :{offset:0.85, batt:null,        note:'Grid-tied. Biggest daytime bill cut for the lowest cost.'},
+  backup:{offset:1.00, batt:[0.30,0.45], note:'Hybrid. Covers your usage and keeps the house on during brownouts.'},
+  indep :{offset:1.15, batt:[0.45,0.65], note:'Hybrid, sized larger. For heavy night use and frequent outages.'}
+};
+var goal='bill';
 
 var bill=document.getElementById('bill'), billOut=document.getElementById('billOut');
+var kwhIn=document.getElementById('kwhIn');
 var outKwh=document.getElementById('outKwh'), outKw=document.getElementById('outKw');
-var outProd=document.getElementById('outProd'), outSave=document.getElementById('outSave'), outYear=document.getElementById('outYear');
+var outPanels=document.getElementById('outPanels'), outInv=document.getElementById('outInv');
+var outBatt=document.getElementById('outBatt'), battRow=document.getElementById('battRow');
+var outProd=document.getElementById('outProd'), outSave=document.getElementById('outSave');
 var coverFill=document.getElementById('coverFill'), coverPct=document.getElementById('coverPct');
+var splitNote=document.getElementById('splitNote');
 var dialSun=document.getElementById('dialSun'), dialRays=document.getElementById('dialRays');
-var dialGlow=document.getElementById('dialGlow'), dialPool=document.getElementById('dialPool'), dialCount=document.getElementById('dialCount');
+var dialGlow=document.getElementById('dialGlow'), dialPool=document.getElementById('dialPool');
+var dialCount=document.getElementById('dialCount');
 var pnls=[].slice.call(document.querySelectorAll('.pnl'));
 
 function peso(n){ return '₱' + Math.round(n).toLocaleString('en-PH'); }
 
-var calcLast=-1;
 function updateCalc(){
   if(!bill) return;
   var v=parseInt(bill.value,10);
-  if(v===calcLast) return;
-  calcLast=v;
+  var g=GOALS[goal];
 
   var frac=(v-bill.min)/(bill.max-bill.min);
   bill.style.setProperty('--fill',(frac*100).toFixed(1)+'%');
 
-  var kwh   = v/RATE;                                   // 1. power used
-  var daily = kwh*DAYTIME_SHARE/30;                     //    daytime load per day
-  var kw    = daily/(PSH*PR);                           // 2. system size
-  kw = Math.max(MIN_KW, Math.round(kw*2)/2);            //    quoted in half-kWp steps
-  var panels = Math.max(2, Math.ceil(kw/PANEL_KW));
+  // the spec is explicit: use real kWh whenever it is available
+  var typed=kwhIn ? parseFloat(String(kwhIn.value).replace(/[^0-9.]/g,'')) : NaN;
+  var usingReal = isFinite(typed) && typed>0;
+  var kwhMo = usingReal ? typed : v/RATE;
+  var kwhDay = kwhMo/30;
 
-  var prod   = kw*PSH*PR*30;                            // 3. what it makes
-  var prodLo = kw*PSH_LO*PR_LO*30;
-  var prodHi = kw*PSH_HI*PR_HI*30;
+  var reqKwp = kwhDay*g.offset/(PSH*EFF);
+  var panels = Math.max(2, Math.ceil(reqKwp/PANEL_KW));
+  var kwp    = panels*PANEL_KW;
+  var prodMo = kwp*PSH*EFF*30;
 
-  var saveLo = Math.min(prodLo*RATE, v);                // 4. savings, never over the bill
-  var saveHi = Math.min(prodHi*RATE, v);
-  var cover  = Math.min(1, (prod*RATE)/v);
+  var inv = INV.find(function(x){ return x>=kwp*0.85; }) || Math.ceil(kwp);
+  var batt = g.batt ? [Math.round(kwhDay*g.batt[0]/DOD), Math.round(kwhDay*g.batt[1]/DOD)] : null;
+
+  // self-consumption is worth the full rate; export is credited lower
+  var selfCap = g.batt ? BATT_SELF : DAY_SHARE;
+  var selfUse = Math.min(prodMo, kwhMo*selfCap);
+  var exported = Math.max(0, prodMo-selfUse);
+  var raw = selfUse*RATE + exported*EXPORT_RATE;
+  var save = Math.min(raw, v*MAX_CUT);   // fixed charges survive any system size
+  var offsetPct = Math.round(prodMo/kwhMo*100);
 
   billOut.textContent = peso(v);
-  outKwh.innerHTML  = Math.round(kwh)+'<small>kWh per month</small>';
-  outKw.innerHTML   = kw.toFixed(1)+'<small>kWp, about '+panels+' panel'+(panels===1?'':'s')+'</small>';
-  outProd.innerHTML = Math.round(prod)+'<small>kWh per month</small>';
-  outSave.textContent = peso(saveLo)+' to '+peso(saveHi);
-  outYear.textContent = peso(saveLo*12)+' to '+peso(saveHi*12);
+  outKwh.innerHTML  = Math.round(kwhMo)+'<small>kWh / month'+(usingReal?', your figure':'')+'</small>';
+  outKw.innerHTML   = kwp.toFixed(2).replace(/0$/,'')+'<small>kWp</small>';
+  outPanels.innerHTML = panels+'<small>&times; '+PANEL_W+' W</small>';
+  outInv.innerHTML  = inv+'<small>kW hybrid</small>';
+  outProd.innerHTML = Math.round(prodMo)+'<small>kWh / month</small>';
+  outSave.innerHTML = peso(save)+'<small>/ month</small>';
 
-  var pct=Math.round(cover*100);
-  if(coverFill) coverFill.style.width=pct+'%';
-  if(coverPct) coverPct.textContent=pct+'%';
+  if(batt){ battRow.hidden=false; outBatt.innerHTML = batt[0]+' to '+batt[1]+'<small>kWh</small>'; }
+  else { battRow.hidden=true; }
 
-  // the animation: the roof fills with the panels this system actually needs
+  if(coverFill) coverFill.style.width=Math.min(100,offsetPct)+'%';
+  if(coverPct) coverPct.textContent=offsetPct+'%';
+  if(splitNote) splitNote.textContent =
+    Math.round(selfUse)+' kWh used as it is made, '+Math.round(exported)+' kWh exported to the grid. '+g.note+
+    (raw > v*MAX_CUT ? ' This system covers more than your usage, so the saving is held at the point where only fixed charges are left.' : '');
+
+  // the animation: the roof carries exactly the panels this system needs
   var shown=Math.min(panels,pnls.length);
   for(var i=0;i<pnls.length;i++){
     var on=i<shown;
     if(pnls[i].__on!==on){ pnls[i].__on=on; pnls[i].classList.toggle('on',on); }
   }
-  if(dialCount) dialCount.textContent=panels+(panels>pnls.length?'+':'');
+  if(dialCount) dialCount.textContent = panels + (panels>pnls.length?'+':'');
 
-  // the sun and the light on the ground answer to production, not to the slider
-  var lit=Math.min(1, prod/ (pnls.length*PANEL_KW*PSH*PR*30));
-  if(dialSun) dialSun.setAttribute('transform','translate(470,66) scale('+(0.72+lit*0.5).toFixed(3)+')');
+  var lit=Math.min(1, panels/pnls.length);
+  if(dialSun) dialSun.setAttribute('transform','translate(515,62) scale('+(0.74+lit*0.46).toFixed(3)+')');
   if(dialRays) dialRays.setAttribute('opacity',(0.15+lit*0.75).toFixed(2));
   if(dialGlow) dialGlow.setAttribute('fill','rgba(255,197,61,'+(lit*0.07).toFixed(3)+')');
   if(dialPool) dialPool.setAttribute('fill','rgba(255,206,120,'+(lit*0.16).toFixed(3)+')');
 }
+
+[].forEach.call(document.querySelectorAll('.goal'), function(b){
+  b.addEventListener('click', function(){
+    goal=b.getAttribute('data-goal');
+    [].forEach.call(document.querySelectorAll('.goal'), function(o){
+      var on = o===b;
+      o.classList.toggle('on',on);
+      o.setAttribute('aria-checked', on?'true':'false');
+    });
+    updateCalc();
+  });
+});
+if(kwhIn) kwhIn.addEventListener('input',updateCalc);
 if(bill){ bill.addEventListener('input',updateCalc); updateCalc(); }
 
 /* ---------- the form ---------- */
