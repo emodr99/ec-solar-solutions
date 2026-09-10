@@ -52,7 +52,15 @@ Then open <http://localhost:8123> in a browser. Chrome shows scroll roughness fi
 ## Things worth knowing before changing content
 
 - **The reviews are real customer quotes.** Verify any new one, and the figures in it, before publishing.
-- **The calculator is an estimate, not a quotation.** It divides the bill by ₱14.7833 per kWh and assumes 4.8 hours of strong sun a day. Every assumption is printed on the page. If the rate changes, it is the `RATE` constant in the script.
+- **The calculator is an estimate, not a quotation.** Every figure on it comes from one chain, so
+  the picture, the system size and the pesos can never disagree:
+  `power used = bill ÷ RATE` → `kWp = power × DAYTIME_SHARE ÷ (30 × PSH × PR)` →
+  `production = kWp × PSH × PR × 30` → `savings = production × RATE`, capped at the bill.
+  It is driven by five constants at the top of the calculator script: `RATE` (₱14.7833/kWh),
+  `PSH` (4.8 sun hours), `PR` (0.78 performance ratio), `DAYTIME_SHARE` (0.55) and
+  `PANEL_KW` (0.6 kWp per panel). **`PR` matters most:** it accounts for roof heat, inverter
+  and wiring losses, and leaving it out undersizes a system by about a quarter. Change these five
+  and the whole calculator, including the animation, follows.
 - **The brownout answer in the FAQ is deliberately blunt.** A normal grid-tied system shuts off during a brownout for safety, and only a hybrid or off-grid system with a battery keeps a home running. Please keep that accurate.
 - The lead form opens the visitor's email app addressed to the business. There is no backend.
 
